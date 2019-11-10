@@ -156,7 +156,7 @@ function draw() {
       cam.reset()
 
       // score
-      fill(0)
+      fill(Koji.config.colors.scoreColor)
       textSize(64)
       textAlign(CENTER, CENTER)
       text(player.score, scaledWidth / 2, 80)

@@ -38,10 +38,10 @@ gameOver.mousePressed = function() {
 gameOver.draw = function() {
     push();
 
-    fill(9, 10, 49);
+    fill(Koji.config.colors.gameOverRectangleColor);
     rect(scaledWidth / 2 - gameOver.w / 2, gameOver.y, gameOver.w, gameOver.h);
 
-    fill(255, 217, 90);
+    fill(Koji.config.colors.gameOverTextColor);
     textSize(48);
     textAlign(CENTER, CENTER);
     text(Koji.config.strings.gameOverText, scaledWidth / 2, gameOver.y + gameOver.h / 2);
