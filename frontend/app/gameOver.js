@@ -29,6 +29,7 @@ gameOver.update = function(dt) {
 
 gameOver.mousePressed = function() {
     gameState = 'playing';
+    window.setScore(player.score)
     gameOver.resetGame();
     gameOver.load();
     window.setAppView('setScore')
