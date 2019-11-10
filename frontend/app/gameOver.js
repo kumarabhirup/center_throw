@@ -44,7 +44,7 @@ gameOver.draw = function() {
     fill(255, 217, 90);
     textSize(48);
     textAlign(CENTER, CENTER);
-    text('GAME OVER', scaledWidth / 2, gameOver.y + gameOver.h / 2);
+    text(Koji.config.strings.gameOverText, scaledWidth / 2, gameOver.y + gameOver.h / 2);
 
     pop();
 }
