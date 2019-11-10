@@ -1,76 +1,16 @@
-# `📦 p5.js Multiplayer Scaffold`
+# `🐒 Swing Monkey`
 
-Start your day with some multiplayer gaming p5.js juice!
-
-## 😃 Getting Started
-
-Main code is in *frontend/app/index.js*
-
-I've provided comments in the most important parts of the code, so you don't get lost.
-
-Feel free to modify anything, upgrade the game, add more stuff!
-
-## 💥 About The Game
-
-This is a multiplayer game scaffold that uses `@withkoji/dispatch`.
+Start your day by Swinging A Monkey!
 
 ## ⚒️ Customizations
 
-Things that can be customized:
-
-### Colors
-
-- Many colors are already set for you. Just use them in code.
-
-- Color names here.
-
-### Images
-
-- Many images are already set for you. Just use them in code.
-
-- Put all your Image names here.
-
-### Sounds
-
-- Many sounds are already set for you. Just use them in code.
-
-- Put your Sound names here.
-
-### Game Settings
-
-- Many strings are already set for you. Just use them in code.
-
-- Put your game settings here.
+Take a look at VCC for customizations.
 
 ## 📖 Notes
 
 Avoid resizing the game window while playing, weird stuff happens.
 
-Few Koji Visual Customization Controls are already there for you to use. They were put together by @Svarog on Koji platform.
-
 ## ☕ For developers
-
-### For using the `with-arena` branch
-
-> Note*: The with-arena branch has the arena with moving players. Also a character picker is made available in that branch.
-
-- Remix the p5.js Scaffold
-
-- Run the following commands in the terminal
-
-```bash
-$ git checkout with-arena
-$ git merge --strategy=ours master
-$ git checkout master
-$ git merge with-arena
-$ git commit -m "The Mega Merge"
-$ git branch -d with-arena
-$ git push origin master
-```
-
-- If something doesn't work after following these steps, kill all processes and do `$ npm i` in both the `frontend` and `backend` directories.
-
-- Then start both the containers again. Take a look at `package.json` to see what command starts the dev server.
 
 ### For setting scores, use the following code snippet 👇
 
