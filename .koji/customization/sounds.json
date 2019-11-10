@@ -1,10 +1,10 @@
 {
   "sounds": {
     "backgroundMusic": "https://objects.koji-cdn.com/08344106-44ba-432e-9c2c-f24876dcad0d/08rbm-lordofdestruction.mp3",
-    "grapple": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
-    "jump": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
-    "star": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
-    "obstacleHit": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav"
+    "grapple": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/8g4z3-grapple.wav",
+    "jump": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/3uj5y-jump.wav",
+    "star": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/wxjvu-star.wav",
+    "obstacleHit": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/rbi93-obstacleHit.wav"
   },
   "@@editor": [
     {
