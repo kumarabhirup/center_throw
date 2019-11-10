@@ -16,14 +16,14 @@ let dtTimer = 0
 let sndMusic
 
 function preload() {
-  gfx.background = loadImage('https://i.ibb.co/PCnsSVr/background.png')
-  gfx.heart = loadImage('https://i.ibb.co/2nKYDyY/heart.png')
-  gfx.heartGrey = loadImage('https://i.ibb.co/2t6VWjC/heart-Grey.png')
-  gfx.star = loadImage('https://i.ibb.co/3cg8c55/star.png')
-  gfx.dirt = loadImage('https://i.ibb.co/KXW90vY/dirt.png')
-  gfx.info = loadImage('https://i.ibb.co/C1x9Lyx/info.png')
-  gfx.player = loadImage('https://i.ibb.co/cCVyXJf/player.png')
-  gfx.obstacle = loadImage('https://i.ibb.co/gTZ8Pqq/obstacle.png')
+  gfx.background = loadImage(Koji.config.images.backgroundInGame)
+  gfx.heart = loadImage(Koji.config.images.heart)
+  gfx.heartGrey = loadImage(Koji.config.images.heartGrey)
+  gfx.star = loadImage(Koji.config.images.pickup)
+  gfx.dirt = loadImage(Koji.config.images.ground)
+  gfx.info = loadImage(Koji.config.images.info)
+  gfx.player = loadImage(Koji.config.images.player)
+  gfx.obstacle = loadImage(Koji.config.images.obstacle)
 
   sfx.grapple = loadSound(Koji.config.sounds.grapple)
   sfx.jump = loadSound(Koji.config.sounds.jump)
