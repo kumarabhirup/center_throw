@@ -25,10 +25,10 @@ function preload() {
   gfx.player = loadImage('https://i.ibb.co/cCVyXJf/player.png')
   gfx.obstacle = loadImage('https://i.ibb.co/gTZ8Pqq/obstacle.png')
 
-  sfx.grapple = loadSound('https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav')
-  sfx.jump = loadSound('https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav')
-  sfx.star = loadSound('https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav')
-  sfx.obstacleHit = loadSound('https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav')
+  sfx.grapple = loadSound(Koji.config.sounds.grapple)
+  sfx.jump = loadSound(Koji.config.sounds.jump)
+  sfx.star = loadSound(Koji.config.sounds.star)
+  sfx.obstacleHit = loadSound(Koji.config.sounds.obstacleHit)
   masterVolume(0.4)
 
   swingPoints.preload()
