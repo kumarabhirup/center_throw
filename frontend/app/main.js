@@ -13,6 +13,7 @@ let scaledMouseY
 const pixelsPerMeter = 160
 const gameState = 'playing'
 let dtTimer = 0
+let sndMusic
 
 function preload() {
   gfx.background = loadImage('https://i.ibb.co/PCnsSVr/background.png')
@@ -49,6 +50,24 @@ function setup() {
   stars.load()
   info.load()
   gameOver.load()
+
+  // Sound stuffs
+  function playMusic(music, volume = 0.4, loop = false) {
+    if (music) {
+      music.setVolume(volume)
+      music.setLoop(loop)
+      music.play()
+    }
+  }
+
+  /**
+   * Load music asynchronously and play once it's loaded
+   * This way the game will load faster
+   */
+  if (Koji.config.sounds.backgroundMusic)
+  sndMusic = loadSound(Koji.config.sounds.backgroundMusic, () =>
+    playMusic(sndMusic, 0.2, true)
+  )
 }
 
 function update() {
