@@ -76,6 +76,7 @@ player.update = function(dt) {
                     // resolve collision to top of ground
                     player.y = y1;
                     player.yv = -6 * pixelsPerMeter;
+                    player.heldTarget = undefined;
                     sfx.jump.play();
                 } else {
                     player.y = y2;
@@ -91,10 +92,10 @@ player.update = function(dt) {
                 gameState = 'gameOver'
             } else {
                 player.reset();
-                player.heldTarget = undefined;
                 ground.reset(player.x);
                 obstacles.enableAll();
             }
+            player.heldTarget = undefined;
         }
     
         // update angle
