@@ -2,13 +2,10 @@
 var swingPoints = {};
 
 swingPoints.preload = function() {
-    swingPoints.colors = {
-        default1: color(160),
-        default2: color(130),
-        target1: color(255, 233, 124),
-        target2: color(225, 203, 94),
-        held1: color(85, 203, 22),
-        held2: color(55, 173, 0)
+    swingPoints.tints = {
+        default: color(160),
+        target: color(255, 233, 124),
+        held: color(85, 203, 22)
     };
 }
 
@@ -53,31 +50,17 @@ swingPoints.update = function(dt) {
 
 swingPoints.draw = function() {
     push();
-    let w1 = 60;
-    let w2 = 50;
-    let w3 = 28;
-    let w4 = 22;
-    let r = 10;
     for (let [i, p] of Object.entries(swingPoints.container)) {
         fill(255);
-        rect(p.x - w1 / 2, p.y - w1 / 2, w1, w1, r);
-        let c1, c2;
+        rect(p.x - 30, p.y - 30, 60, 60, 10);
         if (player.heldTarget === int(i)) {
-            c1 = swingPoints.colors.held1;
-            c2 = swingPoints.colors.held2;
+            tint(swingPoints.tints.held);
         } else if (p.type === 'target') {
-            c1 = swingPoints.colors.target1;
-            c2 = swingPoints.colors.target2;
+            tint(swingPoints.tints.target);
         } else {
-            c1 = swingPoints.colors.default1;
-            c2 = swingPoints.colors.default2;
+            tint(swingPoints.tints.default);
         }
-        fill(c2);
-        rect(p.x - w2 / 2, p.y - w2 / 2, w2, w2, r * w2 / w1);
-        fill(c1);
-        rect(p.x - w3 / 2, p.y - w3 / 2, w3, w3, r * w3 / w1);
-        fill(0);
-        ellipse(p.x, p.y, w4 / 2, w4 / 2);
+        image(gfx.box, p.x - 25, p.y - 25, 50, 50);
     }
     pop();
 }

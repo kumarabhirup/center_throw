@@ -27,8 +27,9 @@ function preload() {
   gfx.info = loadImage(Koji.config.images.info)
   gfx.player = loadImage(Koji.config.images.player)
   gfx.obstacle = loadImage(Koji.config.images.obstacle)
+  gfx.box = loadImage(Koji.config.images.box)
   gfx.speaker = loadImage(Koji.config.images.sound)
-  gfx.speakerMute = loadImage(Koji.config.images.soundMute);
+  gfx.speakerMute = loadImage(Koji.config.images.soundMute)
 
   sfx.grapple = loadSound(Koji.config.sounds.grapple)
   sfx.jump = loadSound(Koji.config.sounds.jump)

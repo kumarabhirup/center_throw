@@ -5,6 +5,7 @@
     "background": "",
     "backgroundInGame": "https://i.ibb.co/PCnsSVr/background.png",
     "player": "https://i.ibb.co/cCVyXJf/player.png",
+    "box": "https://i.ibb.co/gVN1fJN/box.png",
     "heart": "https://i.ibb.co/2nKYDyY/heart.png",
     "heartGrey": "https://i.ibb.co/2t6VWjC/heart-Grey.png",
     "pickup": "https://i.ibb.co/3cg8c55/star.png",
@@ -46,6 +47,11 @@
         {
           "key": "player",
           "name": "Player",
+          "type": "image"
+        },
+        {
+          "key": "box",
+          "name": "Swing Box",
           "type": "image"
         },
         {
