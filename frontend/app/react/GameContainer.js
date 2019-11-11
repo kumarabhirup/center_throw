@@ -21,6 +21,7 @@ class GameContainer extends Component {
     require('script-loader!app/stars.js')
     require('script-loader!app/info.js')
     require('script-loader!app/gameOver.js')
+    require('script-loader!app/volume.js')
 
     let _playerName = Koji.config.strings.defaultPlayerName
     if (localStorage.getItem('playerName')) {

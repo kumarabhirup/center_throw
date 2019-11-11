@@ -12,8 +12,11 @@ let scaledMouseX
 let scaledMouseY
 const pixelsPerMeter = 160
 const gameState = 'playing'
+
 let dtTimer = 0
 let sndMusic
+var defaultVolume = 0.4
+var uiPressed = false
 
 function preload() {
   gfx.background = loadImage(Koji.config.images.backgroundInGame)
@@ -24,12 +27,14 @@ function preload() {
   gfx.info = loadImage(Koji.config.images.info)
   gfx.player = loadImage(Koji.config.images.player)
   gfx.obstacle = loadImage(Koji.config.images.obstacle)
+  gfx.speaker = loadImage(Koji.config.images.sound)
+  gfx.speakerMute = loadImage(Koji.config.images.soundMute);
 
   sfx.grapple = loadSound(Koji.config.sounds.grapple)
   sfx.jump = loadSound(Koji.config.sounds.jump)
   sfx.star = loadSound(Koji.config.sounds.star)
   sfx.obstacleHit = loadSound(Koji.config.sounds.obstacleHit)
-  masterVolume(0.4)
+  masterVolume(defaultVolume)
 
   swingPoints.preload()
 }
@@ -50,6 +55,7 @@ function setup() {
   stars.load()
   info.load()
   gameOver.load()
+  volume.load()
 
   // Sound stuffs
   function playMusic(music, volume = 0.4, loop = false) {
@@ -91,24 +97,33 @@ function fixedUpdate(dt) {
       stars.update(dt)
       info.update(dt)
       gameOver.update(dt)
+      volume.update(dt);
       break
     case 'gameOver':
       info.update(dt)
       gameOver.update(dt)
+      volume.update(dt);
       break
   }
 }
 
 function mousePressed() {
+  uiPressed = false
   switch (gameState) {
     case 'menu':
       menu.mousePressed()
       break
     case 'playing':
-      player.mousePressed()
+      volume.mousePressed();
+      if (!uiPressed) {
+          player.mousePressed();
+      }
       break
     case 'gameOver':
-      gameOver.mousePressed()
+      volume.mousePressed();
+      if (!uiPressed) {
+          gameOver.mousePressed();
+      }
       break
   }
 }
@@ -169,6 +184,7 @@ function draw() {
 
       info.draw()
       gameOver.draw()
+      volume.draw()
       break
   }
   pop()

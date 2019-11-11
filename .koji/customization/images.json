@@ -1,5 +1,7 @@
 {
   "images": {
+    "sound": "https://i.ibb.co/89Gp52x/speaker.png",
+    "soundMute": "https://i.ibb.co/Qj4yPGf/speaker-Mute.png",
     "background": "",
     "backgroundInGame": "https://i.ibb.co/PCnsSVr/background.png",
     "player": "https://i.ibb.co/cCVyXJf/player.png",
@@ -17,6 +19,18 @@
       "icon": "💪🏻",
       "source": "images.json",
       "fields": [
+        {
+          "key": "sound",
+          "name": "Sound On",
+          "description": "Square speaker image.",
+          "type": "image"
+        },
+        {
+          "key": "soundMute",
+          "name": "Sound Mute",
+          "description": "Square speaker image.",
+          "type": "image"
+        },
         {
           "key": "background",
           "name": "Background",
