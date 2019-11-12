@@ -23,13 +23,13 @@
         {
           "key": "sound",
           "name": "Sound On",
-          "description": "Square speaker image.",
+          "description": "Square speaker image. Square: 125x125",
           "type": "image"
         },
         {
           "key": "soundMute",
           "name": "Sound Mute",
-          "description": "Square speaker image.",
+          "description": "Square speaker image. Square: 125x125",
           "type": "image"
         },
         {
@@ -47,41 +47,49 @@
         {
           "key": "player",
           "name": "Player",
+          "description": "Player image. Square: 500x500",
           "type": "image"
         },
         {
           "key": "box",
           "name": "Swing Box",
+          "description": "Box image. Square: 250x250",
           "type": "image"
         },
         {
           "key": "heart",
           "name": "Heart",
+          "description": "Heart image. Square: 100x100",
           "type": "image"
         },
         {
           "key": "heartGrey",
           "name": "Heart Grey",
+          "description": "Grey Heart image. Square: 100x100",
           "type": "image"
         },
         {
           "key": "pickup",
           "name": "Pickup",
+          "description": "Pickup image. Square: 200x200",
           "type": "image"
         },
         {
           "key": "ground",
           "name": "Ground",
+          "description": "Ground image. Square: 800x800 texture image.",
           "type": "image"
         },
         {
           "key": "info",
           "name": "Info",
+          "description": "Instructions banner image. Rectangle preferred. Ideal Size: 700x150",
           "type": "image"
         },
         {
           "key": "obstacle",
           "name": "Obstacle",
+          "description": "Obstacle image. Long Standing Rectangle: 50x600",
           "type": "image"
         }
       ]
