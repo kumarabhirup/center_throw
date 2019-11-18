@@ -90,6 +90,11 @@
           "type": "text"
         },
         {
+          "key": "shieldText",
+          "name": "Shield Text",
+          "type": "text"
+        },
+        {
           "key": "emailInputEnabled",
           "name": "Enable E-Mail Input",
           "description": "Enable/Disable E-Mail input while submitting score.",

@@ -213,13 +213,14 @@ function draw() {
             // shield notification
             if (gameTime - player.shieldTime < player.shieldMaxTime) {
                 textSize(48);
+                fill(Koji.config.colors.shieldProgressBarColor)
                 text(Koji.config.strings.shieldText, scaledWidth / 2, scaledHeight - 64);
-                stroke(0);
+                stroke(Koji.config.colors.shieldProgressBarColor);
                 strokeWeight(2);
                 noFill();
                 rect(scaledWidth / 2 - 100, scaledHeight - 32, 200, 16);
                 noStroke();
-                fill(0);
+                fill(Koji.config.colors.shieldProgressBarColor);
                 let t = 1 - (gameTime - player.shieldTime) / player.shieldMaxTime;
                 rect(scaledWidth / 2 - 100, scaledHeight - 32, 200 * t, 16);
             }

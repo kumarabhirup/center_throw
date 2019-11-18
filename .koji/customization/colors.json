@@ -14,7 +14,8 @@
     "buttonHoverColor": "#23bcc5",
     "buttonClickColor": "#2CECF5",
     "gameOverRectangleColor": "#0a0a31",
-    "gameOverTextColor": "#ffffff"
+    "gameOverTextColor": "#ffffff",
+    "shieldProgressBarColor": "#000000"
   },
   "@@editor": [
     {
@@ -96,6 +97,11 @@
         {
           "key": "gameOverTextColor",
           "name": "Game Over Text Color",
+          "type": "color"
+        },
+        {
+          "key": "shieldProgressBarColor",
+          "name": "Shield Progress Bar Color",
           "type": "color"
         }
       ]
