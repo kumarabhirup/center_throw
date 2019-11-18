@@ -1,10 +1,10 @@
 {
   "sounds": {
     "backgroundMusic": "https://objects.koji-cdn.com/08344106-44ba-432e-9c2c-f24876dcad0d/08rbm-lordofdestruction.mp3",
-    "fall": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/8g4z3-grapple.wav",
+    "fall": "https://objects.koji-cdn.com/317554dd-27e5-4d71-8d80-ba6fadfb82bc/2goy3-fall.wav",
     "jump": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/3uj5y-jump.wav",
     "pointPickup": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/wxjvu-star.wav",
-    "obstacleHit": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/rbi93-obstacleHit.wav"
+    "obstacleHit": "https://objects.koji-cdn.com/317554dd-27e5-4d71-8d80-ba6fadfb82bc/czz6h-explosion.wav"
   },
   "@@editor": [
     {
