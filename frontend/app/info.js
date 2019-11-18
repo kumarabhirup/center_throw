@@ -1,15 +1,15 @@
 
 var info = {};
 
-info.load = function() {
+info.load = function () {
     info.t = 0;
 }
 
-info.update = function(dt) {
+info.update = function (dt) {
     info.t += dt;
 }
 
-info.draw = function() {
+info.draw = function () {
     let y1 = 910;
     let y2 = 750;
     let y = y1;

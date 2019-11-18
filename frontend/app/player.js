@@ -3,163 +3,126 @@ var player = {};
 
 player.load = function() {
     player.x = 0;
-    player.y = -650;
-    player.w = 90;
-    player.h = 90;
-    player.xv = 0;
-    player.yv = 0;
-    player.angle = 0;
-    player.heldTarget = undefined;
-    player.lives = 3;
+    player.y = 0;
+    // player size
+    player.w = 75;
+    player.h = 75;
+
+    // player speed
+    player.baseMovementSpeed = 750;
+    player.gravitySpeed = 900;
+
+    player.xv = player.baseMovementSpeed;
+    player.yv = player.gravitySpeed;
+
     player.distance = 0;
+    player.addedDistance = 0;
     player.stars = 0;
     player.score = 0;
-    player.highscore = 0;
-    player.resetting = false;
-    player.resetT = 0;
-    player.grappleDisabled = false;
-}
+    player.lives = 3;
+    player.canJump = true;
+    player.lastX = -1;
 
-player.reset = function() {
-    player.resetting = true;
-    player.resetT = 0;
-    player.y = -650;
-    player.xv = 0;
-    player.yv = 0;
+    player.damageBlinkTime = 2;
+    player.damageTime = gameTime;
+    player.shieldMaxTime = 15;
+    player.shieldTime = -player.shieldMaxTime - 1;
 }
 
 player.update = function(dt) {
-    if (player.resetting) {
-        player.resetT += dt * 5;
-        if (player.resetT > 1) {
-            player.resetting = false;
-            player.grappleDisabled = false;
-        }
-    } else {
-        player.yv += 9.8 * pixelsPerMeter * dt;
-        
-        player.x += player.xv * dt;
-        player.y += player.yv * dt;
-        
-        // constrain to rope
-        if (player.heldTarget !== undefined) {
-            let target = swingPoints.container[player.heldTarget];
-            let d = dist(player.x, player.y - player.h / 2, target.x, target.y);
-            let newX = target.x + (player.x - target.x) / d * player.heldDistance;
-            let newY = target.y + (player.y - player.h / 2 - target.y) / d * player.heldDistance + player.h / 2;
-            player.xv += (newX - player.x) / dt;
-            player.yv += (newY - player.y) / dt;
-            // increase velocity when low, decrease when low
-            player.xv *= exp(log(1 + constrain((player.y - (-200)) / 900, -0.5, 0.5)) * dt);
-            player.yv *= exp(log(1 + constrain((player.y - (-200)) / 900, -0.5, 0.5)) * dt);
-            player.x = newX;
-            player.y = newY;
-        }
-    
-        // collide with ground and jump
-        if (player.x + player.w / 2 > ground.x && player.x - player.w / 2 < ground.x + ground.w
-        && player.y > ground.y && player.y - player.h < ground.y + ground.h) {
-            let x1 = ground.x - player.w / 2;
-            let x2 = ground.x + ground.w + player.w / 2;
-            let y1 = ground.y;
-            let y2 = ground.y + ground.h + player.h;
-            // xv check to fix tp to side
-            if (min(player.x - x1, x2 - player.x) < min(player.y - y1, y2 - player.y) && player.xv !== 0) {
-                if (player.x - x1 < x2 - player.x) {
-                    player.x = x1;
-                } else {
-                    player.x = x2;
-                }
-                player.xv = -player.xv;
-            } else {
-                if (player.y - y1 < y2 - player.y) {
-                    // resolve collision to top of ground
-                    player.y = y1;
-                    player.yv = -6 * pixelsPerMeter;
-                    player.heldTarget = undefined;
-                    sfx.jump.play();
-                } else {
-                    player.y = y2;
-                    player.yv = -player.yv;
-                }
-            }
-        }
-    
-        // check if fallen
-        if (player.y - player.h > cam.y + 900 / 2) {
-            player.lives -= 1;
-            if (player.lives === 0) {
-                gameState = 'gameOver'
-            } else {
-                player.reset();
-                ground.reset(player.x);
-                obstacles.enableAll();
-            }
-            player.heldTarget = undefined;
-        }
-    
-        // update angle
-        let targetAngle = atan2(player.yv, player.xv);
-        if (targetAngle <= -PI / 2) {
-            targetAngle += PI;
-        } else if (targetAngle > PI / 2) {
-            targetAngle -= PI;
-        }
-        player.angle = lerp(player.angle, targetAngle, dt*8);
+    player.lastX = player.x;
+    player.x += player.xv * dt;
+    player.y += player.yv * dt;
 
+    if (player.lives > 0) {
+        // check if fallen off screen
+        if (player.y < cam.y - scaledHeight / 2 || player.y > cam.y + scaledHeight / 2 + player.h
+        || player.x + player.w / 2 < cam.x - scaledWidth / 2) {
+            player.damage();
+            sfx.fall.play();
+            if (player.lives > 0) {
+                let stars = player.stars;
+                let lives = player.lives;
+                let addedDistance = player.x;
+                player.load();
+                player.stars = stars;
+                player.lives = lives;
+                player.addedDistance = addedDistance;
+                cam.x = 0;
+            }
+        }
+    
         player.updateScore();
-
-        cam.x = player.x + scaledWidth / 4;
-        cam.y = -200;
+    } else {
+        player.yv += 900 * dt;
     }
+}
+
+player.damage = function() {
+    player.lives -= 1;
+    player.damageTime = gameTime;
+    player.xv = player.baseMovementSpeed;
+    if (player.lives === 0) {
+        gameState = 'gameOver';
+        player.yv = -900;
+        player.xv = -200;
+        player.shieldTime = -player.shieldMaxTime - 1;
+    }
+}
+
+player.updateScore = function() {
+    player.distance = max(floor((player.x + player.addedDistance) / 100), 0);
+    player.score = player.distance * 10 + player.stars * 100;
+}
+
+player.tryJump = function() {
+    if (player.canJump) {
+        player.yv = -player.yv;
+        sfx.jump.play();
+    }
+}
+
+player.isVulnerable = function() {
+    return (gameTime - player.damageTime > player.damageBlinkTime
+        && gameTime - player.shieldTime > player.shieldMaxTime);
 }
 
 player.mousePressed = function() {
-    if (!player.resetting && !player.grappleDisabled) {
-        player.heldTarget = swingPoints.target;
-        let target = swingPoints.container[player.heldTarget];
-        player.heldDistance = dist(player.x, player.y - player.h / 2, target.x, target.y);
-        sfx.grapple.play();
-    }
+    player.tryJump();
 }
 
-player.mouseReleased = function() {
-    if (player.heldTarget !== undefined) {
-        sfx.grapple.play();
+player.keyPressed = function() {
+    if (keyCode === 87 || keyCode == 38 || keyCode == 32) { // w, up, space
+        player.tryJump();
     }
-    player.heldTarget = undefined;
-}
-
-player.updateScore = function () {
-    player.distance = max(floor(player.x / pixelsPerMeter), 0);
-    player.score = player.distance + player.stars * 100;
-    player.highscore = max(player.highscore, player.score);
 }
 
 player.draw = function() {
     push();
-    fill(0);
-    let angle = player.angle;
-    if (player.xv < 0) {
-        angle = -angle;
-    } else if (player.xv === 0) {
-        angle = 0;
+
+    if (player.lives > 0) {
+        translate(player.x, player.y - player.h / 2);
+        if (player.yv < 0) {
+            scale(1, -1);
+        }
+    
+        if (gameTime - player.damageTime > player.damageBlinkTime || (gameTime - player.damageTime) % (1 / 4) < 1 / 8) {
+            let img = player.x === player.lastX ? gfx.player : gfx.playerMoving;
+            image(img, -player.w / 2, -player.h / 2, player.w, player.h);
+        }
+    
+        // shield
+        if (gameTime - player.shieldTime < player.shieldMaxTime) {
+            stroke(0, 156);
+            strokeWeight(4);
+            fill(128, 156);
+            ellipse(0, 0, player.w * 1.5, player.h * 1.5);
+        }
+    } else {
+        translate(player.x, player.y - player.h / 2);
+        rotate(gameTime * TWO_PI * 2);
+        image(gfx.player, -player.w / 2, -player.h / 2, player.w, player.h);
     }
-    push();
-    translate(player.x, player.y - player.h / 2);
-    if (player.xv < 0) {
-        scale(-1, 1);
-    }
-    rotate(angle);
-    image(gfx.player, -player.w / 2, -player.h / 2, player.w, player.h);
-    pop();
-    stroke(0);
-    strokeWeight(4);
-    if (player.heldTarget !== undefined) {
-        let target = swingPoints.container[player.heldTarget];
-        let tailOffsetX = cos(angle * (player.xv < 0 ? -1 : 1) - PI / 2) * 46;
-        let tailOffsetY = sin(angle * (player.xv < 0 ? -1 : 1) - PI / 2) * 46;
-        line(player.x + tailOffsetX, player.y - player.h / 2 + tailOffsetY, target.x, target.y);
-    }
+
     pop();
 }

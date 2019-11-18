@@ -1,24 +1,21 @@
 
 var gameOver = {};
 
-gameOver.load = function() {
+gameOver.load = function () {
     gameOver.t = 0;
     gameOver.y = 910;
     gameOver.w = 600;
     gameOver.h = 160;
 }
 
-gameOver.resetGame = function() {
-    let highscore = player.highscore;
+gameOver.resetGame = function () {
     player.load();
-    player.highscore = highscore;
-    ground.load();
-    swingPoints.load();
-    obstacles.load();
-    stars.load();
+    track.load();
+    info.load();
+    cam.x = 0;
 }
 
-gameOver.update = function(dt) {
+gameOver.update = function (dt) {
     if (gameState === 'gameOver') {
         gameOver.t = min(gameOver.t + dt, 1);
     }
@@ -27,12 +24,12 @@ gameOver.update = function(dt) {
     gameOver.y = lerp(y1, y2, ease.inOutCubic(gameOver.t));
 }
 
-gameOver.mousePressed = function() {
+gameOver.mousePressed = function () {
     gameState = 'playing';
-    window.setScore(player.score)
+    window.setScore(player.score);
     gameOver.resetGame();
     gameOver.load();
-    window.setAppView('setScore')
+    window.setAppView('setScore');
 }
 
 gameOver.draw = function() {

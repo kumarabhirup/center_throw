@@ -4,14 +4,17 @@
     "soundMute": "https://i.ibb.co/Qj4yPGf/speaker-Mute.png",
     "background": "",
     "backgroundInGame": "https://i.ibb.co/PCnsSVr/background.png",
-    "player": "https://i.ibb.co/cCVyXJf/player.png",
-    "box": "https://i.ibb.co/gVN1fJN/box.png",
+    "player": "https://i.ibb.co/6FyTMFy/player.png",
+    "playerMoving": "https://i.ibb.co/CwY1nYb/player-Moving.png",
+    "tile": "https://i.ibb.co/NsS3KgC/tile.png",
     "heart": "https://i.ibb.co/2nKYDyY/heart.png",
     "heartGrey": "https://i.ibb.co/2t6VWjC/heart-Grey.png",
-    "pickup": "https://i.ibb.co/3cg8c55/star.png",
-    "ground": "https://i.ibb.co/KXW90vY/dirt.png",
-    "info": "https://i.ibb.co/C1x9Lyx/info.png",
-    "obstacle": "https://i.ibb.co/gTZ8Pqq/obstacle.png"
+    "pointPickup": "https://i.ibb.co/3cg8c55/star.png",
+    "speedPickup": "https://i.ibb.co/k9y1ScK/speed.png",
+    "info": "https://i.ibb.co/DYVDFqF/info.png",
+    "shield": "https://i.ibb.co/HKKfKQg/shield.png",
+    "obstacle": "https://i.ibb.co/ZWhjWc6/tnt.png",
+    "obstacleExplosion": "https://i.ibb.co/KXF3V5K/tnt-Explosion.png"
   },
   "@@editor": [
     {
@@ -51,9 +54,15 @@
           "type": "image"
         },
         {
-          "key": "box",
-          "name": "Swing Box",
-          "description": "Box image. Square: 250x250",
+          "key": "playerMoving",
+          "name": "Player Moving",
+          "description": "Player image when moving. Square: 500x500",
+          "type": "image"
+        },
+        {
+          "key": "tile",
+          "name": "Tile image",
+          "description": "Tile image that makes platform. Square: 250x250",
           "type": "image"
         },
         {
@@ -69,15 +78,15 @@
           "type": "image"
         },
         {
-          "key": "pickup",
-          "name": "Pickup",
-          "description": "Pickup image. Square: 200x200",
+          "key": "pointPickup",
+          "name": "Point Pickup",
+          "description": "Pickup that gives points. Star image recommended. Square: 200x200",
           "type": "image"
         },
         {
-          "key": "ground",
-          "name": "Ground",
-          "description": "Ground image. Square: 800x800 texture image.",
+          "key": "speedPickup",
+          "name": "Speed Pickup",
+          "description": "Pickup that gives speed. Square: 200x200",
           "type": "image"
         },
         {
@@ -87,9 +96,21 @@
           "type": "image"
         },
         {
+          "key": "shield",
+          "name": "Shield",
+          "description": "Shield image. Square: 500x500",
+          "type": "image"
+        },
+        {
           "key": "obstacle",
           "name": "Obstacle",
-          "description": "Obstacle image. Long Standing Rectangle: 50x600",
+          "description": "Obstacle image. Square: 500x500",
+          "type": "image"
+        },
+        {
+          "key": "obstacleExplosion",
+          "name": "Obstacle Explosion",
+          "description": "Image that appears after hitting the obstacle. Square: 500x500",
           "type": "image"
         }
       ]

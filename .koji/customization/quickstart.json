@@ -4,9 +4,9 @@
       "strings.title",
       "images.backgroundInGame",
       "images.player",
-      "images.obstacle",
-      "images.pickup",
-      "images.box"
+      "images.playerMoving",
+      "images.pointPickup",
+      "images.tile"
     ]
   }
 }

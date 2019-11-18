@@ -1,9 +1,9 @@
 {
   "sounds": {
     "backgroundMusic": "https://objects.koji-cdn.com/08344106-44ba-432e-9c2c-f24876dcad0d/08rbm-lordofdestruction.mp3",
-    "grapple": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/8g4z3-grapple.wav",
+    "fall": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/8g4z3-grapple.wav",
     "jump": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/3uj5y-jump.wav",
-    "star": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/wxjvu-star.wav",
+    "pointPickup": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/wxjvu-star.wav",
     "obstacleHit": "https://objects.koji-cdn.com/db07eaeb-15c1-441e-8bf8-240163751da5/rbi93-obstacleHit.wav"
   },
   "@@editor": [
@@ -20,27 +20,27 @@
           "type": "sound"
         },
         {
-          "key": "grapple",
-          "name": "Grapple Sound",
-          "description": "Sound when rope is tied to Swing Point.",
+          "key": "fall",
+          "name": "Fall Sound",
+          "description": "Sound when player goes out of the screen.",
           "type": "sound"
         },
         {
-          "key": "star",
-          "name": "Star Sound",
-          "description": "Sound when monkey gets a star.",
+          "key": "pointPickup",
+          "name": "Point Pickup Sound",
+          "description": "Sound when player gets a point pickup (eg. Star).",
           "type": "sound"
         },
         {
           "key": "jump",
           "name": "Jump Sound",
-          "description": "Sound when monkey jumps.",
+          "description": "Sound when player jumps.",
           "type": "sound"
         },
         {
           "key": "obstacleHit",
           "name": "Obstacle Hit",
-          "description": "Sound when monkey hits bamboo.",
+          "description": "Sound when player hits obstacle.",
           "type": "sound"
         }
       ]
