@@ -113,10 +113,12 @@ player.draw = function() {
     
         // shield
         if (gameTime - player.shieldTime < player.shieldMaxTime) {
-            stroke(0, 156);
-            strokeWeight(4);
-            fill(128, 156);
-            ellipse(0, 0, player.w * 1.5, player.h * 1.5);
+            // stroke(0, 156);
+            // strokeWeight(4);
+            // fill(128, 156);
+            // ellipse(0, 0, player.w * 1.5, player.h * 1.5);
+            imageMode(CENTER)
+            image(gfx.shield, 0, 0, player.w * 1.5, player.h * 1.5)
         }
     } else {
         translate(player.x, player.y - player.h / 2);
