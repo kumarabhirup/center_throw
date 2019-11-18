@@ -2,6 +2,9 @@
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
     "title": "Spongebob Switch",
+    "playerMoveSpeed": 750,
+    "gravitySpeed": 1100,
+    "shieldDuration": 15,
     "desktop_instructions1": "Switch the gravity to save Spongebob!",
     "desktop_instructions2": "Hit Spacebar to switch!",
     "desktop_instructions3": "Don't hit bombs and keep running!",
@@ -35,6 +38,37 @@
           "name": "Game Title",
           "description": "The title that is displayed in the start menu",
           "type": "text"
+        },
+        {
+          "key": "playerMoveSpeed",
+          "name": "Player Movement Speed",
+          "type": "range",
+          "typeOptions": {
+            "min": 500,
+            "max": 1250,
+            "step": 2
+          }
+        },
+        {
+          "key": "gravitySpeed",
+          "name": "Gravity Speed",
+          "description": "Speed at which player switches/flips.",
+          "type": "range",
+          "typeOptions": {
+            "min": 700,
+            "max": 2000,
+            "step": 2
+          }
+        },
+        {
+          "key": "shieldDuration",
+          "name": "Shield Duration",
+          "type": "range",
+          "typeOptions": {
+            "min": 4,
+            "max": 25,
+            "step": 1
+          }
         },
         {
           "key": "desktop_instructions1",

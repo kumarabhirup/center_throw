@@ -9,8 +9,8 @@ player.load = function() {
     player.h = 75;
 
     // player speed
-    player.baseMovementSpeed = 750;
-    player.gravitySpeed = 900;
+    player.baseMovementSpeed = Koji.config.strings.playerMoveSpeed;
+    player.gravitySpeed = Koji.config.strings.gravitySpeed;
 
     player.xv = player.baseMovementSpeed;
     player.yv = player.gravitySpeed;
@@ -25,7 +25,7 @@ player.load = function() {
 
     player.damageBlinkTime = 2;
     player.damageTime = gameTime;
-    player.shieldMaxTime = 15;
+    player.shieldMaxTime = Koji.config.strings.shieldDuration; // 15
     player.shieldTime = -player.shieldMaxTime - 1;
 }
 
