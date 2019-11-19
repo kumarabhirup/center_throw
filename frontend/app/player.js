@@ -5,8 +5,8 @@ player.load = function() {
     player.x = 0;
     player.y = 0;
     // player size
-    player.w = 75;
-    player.h = 75;
+    player.w = Koji.config.strings.playerSize; // 75
+    player.h = Koji.config.strings.playerSize;
 
     // player speed
     player.baseMovementSpeed = Koji.config.strings.playerMoveSpeed;
