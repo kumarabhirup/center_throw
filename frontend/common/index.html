@@ -16,6 +16,7 @@
 	<link rel="manifest" href="./manifest.webmanifest" />
 
 	<title>p5js Scaffold</title>
+
 	<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 	<script language="javascript" type="text/javascript"
@@ -33,6 +34,10 @@
 
 <body oncontextmenu="return false">
 	<noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div class="cover-portrait">
+		PLEASE PLAY IN LANDSCAPE MODE
+	</div>
 
 	<div id="p5_loading">
 		<div class="lds-ring">
@@ -58,6 +63,18 @@
 			passive: false,
 		}
 		)
+
+        function listenSizeChange() {
+			if (window.innerHeight > window.innerWidth) {
+				document.getElementsByClassName('cover-portrait')[0].style.display = 'block';
+			} else {
+				document.getElementsByClassName('cover-portrait')[0].style.display = 'none';
+			}
+		}
+
+		window.addEventListener('resize', listenSizeChange)
+
+        listenSizeChange()
 	</script>
 </footer>
 
