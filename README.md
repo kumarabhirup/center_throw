@@ -1,4 +1,4 @@
-# `Spongebob Switch`
+# `Run N Switch`
 
 Start your day by flipping Spongebobs!
 

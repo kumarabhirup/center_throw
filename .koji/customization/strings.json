@@ -1,8 +1,8 @@
 {
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
-    "title": "Sonic Switch",
-    "playerSize": 92,
+    "title": "Run N Switch",
+    "playerSize": 75,
     "playerMoveSpeed": 750,
     "gravitySpeed": 1100,
     "shieldDuration": 15,
