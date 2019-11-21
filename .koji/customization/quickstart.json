@@ -2,10 +2,10 @@
   "quickstart": {
     "items": [
       "strings.title",
-      "images.backgroundInGame",
       "images.player",
       "images.playerMoving",
       "images.pointPickup",
+      "images.shield",
       "images.tile"
     ]
   }

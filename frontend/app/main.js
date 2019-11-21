@@ -11,10 +11,20 @@ var gameState = 'playing';
 var gameTime = 0;
 var dtTimer = 0;
 
+var width = window.innerWidth;
+var height = window.innerHeight;
+
 let sndMusic;
 
 function preload() {
-    gfx.background = loadImage(Koji.config.images.backgroundInGame);
+    gfx.backgrounds = [];
+    
+    for (let x = 0; x < Koji.config.images.backgrounds.length; x++) {
+        gfx.backgrounds[x] = {};
+        gfx.backgrounds[x].img = loadImage(Koji.config.images.backgrounds[x].image);
+        gfx.backgrounds[x].scroll = Koji.config.images.backgrounds[x].scroll;
+    }
+
     gfx.player = loadImage(Koji.config.images.player);
     gfx.playerMoving = loadImage(Koji.config.images.playerMoving);
     gfx.heart = loadImage(Koji.config.images.heart);
@@ -190,7 +200,29 @@ function draw() {
             break;
         case 'playing':
         case 'gameOver':
-            image(gfx.background, 0, 0, scaledWidth, scaledHeight);
+           console.log('c', cam);
+
+            for (let x = 0; x < gfx.backgrounds.length; x++) {
+                if (typeof gfx.backgrounds[x].x1 === 'undefined') {
+                    gfx.backgrounds[x].x1 = 0;
+                    gfx.backgrounds[x].x2 = scaledWidth;
+                }
+                
+                gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                
+                if (gfx.backgrounds[x].x1 < -scaledWidth) {
+                    gfx.backgrounds[x].x1 = scaledWidth;
+                }
+
+                if (gfx.backgrounds[x].x2 < -scaledWidth) {
+                    gfx.backgrounds[x].x2 = scaledWidth;
+                }
+
+                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
+                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
+            }
+
             cam.set();
             track.draw();
             player.draw();

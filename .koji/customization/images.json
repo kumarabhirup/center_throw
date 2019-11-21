@@ -1,9 +1,26 @@
 {
   "images": {
+    "backgrounds": [
+      {
+        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/owdvx-sky.png",
+        "scroll": 0
+      },
+      {
+        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/hke0r-rocks_3.png",
+        "scroll": 0.1
+      },
+      {
+        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/zcktx-rocks_2.png",
+        "scroll": 0.2
+      },
+      {
+        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/bqkx4-clouds_2.png",
+        "scroll": 0.3
+      }
+    ],
     "sound": "https://i.ibb.co/89Gp52x/speaker.png",
     "soundMute": "https://i.ibb.co/Qj4yPGf/speaker-Mute.png",
     "background": "",
-    "backgroundInGame": "https://i.ibb.co/PCnsSVr/background.png",
     "player": "https://images.koji-cdn.com/317554dd-27e5-4d71-8d80-ba6fadfb82bc/dkg6s-315da1d184234bb0973e98dc4e41bfd8.png",
     "playerMoving": "https://images.koji-cdn.com/317554dd-27e5-4d71-8d80-ba6fadfb82bc/afbcj-ce070219b1c5476f8b99904d1b29e2dd.png",
     "tile": "https://i.ibb.co/NsS3KgC/tile.png",
@@ -24,6 +41,28 @@
       "source": "images.json",
       "fields": [
         {
+          "key": "backgrounds",
+          "name": "Backgrounds",
+          "type": "object<Background>[]",
+          "typeOptions": {
+            "Background": {
+              "image": {
+                "name": "Image",
+                "type": "image"
+              },
+              "scroll": {
+                "name": "Scroll",
+                "type": "range",
+                "typeOptions": {
+                  "min": 0,
+                  "max": 1,
+                  "step": 0.1
+                }
+              }
+            }
+          }
+        },
+        {
           "key": "sound",
           "name": "Sound On",
           "description": "Square speaker image. Square: 125x125",
@@ -37,13 +76,7 @@
         },
         {
           "key": "background",
-          "name": "Background",
-          "description": "Leave empty if you want to use a solid color. Ideal size: any, but keep in mind it could deform based on screen size",
-          "type": "image"
-        },
-        {
-          "key": "backgroundInGame",
-          "name": "Background for Gaming Screen",
+          "name": "Background in Menu",
           "description": "Leave empty if you want to use a solid color. Ideal size: any, but keep in mind it could deform based on screen size",
           "type": "image"
         },
