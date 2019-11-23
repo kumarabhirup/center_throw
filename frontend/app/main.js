@@ -204,9 +204,11 @@ function draw() {
                     gfx.backgrounds[x].x2 = scaledWidth;
                 }
                 
-                gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                
+                if (gameTime - player.startTime > player.startMaxTime) {
+                    gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                    gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                }
+
                 if (gfx.backgrounds[x].x1 < -scaledWidth) {
                     gfx.backgrounds[x].x1 = scaledWidth;
                 }
