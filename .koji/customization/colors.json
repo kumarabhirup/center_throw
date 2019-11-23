@@ -15,7 +15,9 @@
     "buttonClickColor": "#2CECF5",
     "gameOverRectangleColor": "#0a0a31",
     "gameOverTextColor": "#ffffff",
-    "shieldProgressBarColor": "#000000"
+    "shieldProgressBarColor": "#000000",
+    "speedProgressBarColor": "#ff0000",
+    "gameCountdownColor": "#000000"
   },
   "@@editor": [
     {
@@ -102,6 +104,16 @@
         {
           "key": "shieldProgressBarColor",
           "name": "Shield Progress Bar Color",
+          "type": "color"
+        },
+        {
+          "key": "speedProgressBarColor",
+          "name": "Speed Progress Bar Color",
+          "type": "color"
+        },
+        {
+          "key": "gameCountdownColor",
+          "name": "Game Countdown Color",
           "type": "color"
         }
       ]

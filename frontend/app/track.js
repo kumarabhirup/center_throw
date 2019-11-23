@@ -195,7 +195,7 @@ track.update = function(dt) {
                             break;
                         case 'speed':
                             if (!v.pickedUp) {
-                                player.xv *= 1.5;
+                                player.speedTime = gameTime;
                                 sfx.star.play();
                                 v.pickedUp = true;
                             }

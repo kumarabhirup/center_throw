@@ -116,8 +116,6 @@ function fixedUpdate(dt) {
             info.update(dt);
             gameOver.update(dt);
             volume.update(dt);
-
-            cam.x = max(cam.x + player.xv * 0.8 * dt, player.x);
             break;
         case 'gameOver':
             gameTime += dt;
@@ -201,27 +199,27 @@ function draw() {
         case 'playing':
         case 'gameOver':
            console.log('c', cam);
-
-            for (let x = 0; x < gfx.backgrounds.length; x++) {
-                if (typeof gfx.backgrounds[x].x1 === 'undefined') {
-                    gfx.backgrounds[x].x1 = 0;
-                    gfx.backgrounds[x].x2 = scaledWidth;
-                }
-                
-                gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                
-                if (gfx.backgrounds[x].x1 < -scaledWidth) {
-                    gfx.backgrounds[x].x1 = scaledWidth;
-                }
-
-                if (gfx.backgrounds[x].x2 < -scaledWidth) {
-                    gfx.backgrounds[x].x2 = scaledWidth;
-                }
-
-                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
-                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
+           
+           for (let x = 0; x < gfx.backgrounds.length; x++) {
+            if (typeof gfx.backgrounds[x].x1 === 'undefined') {
+                gfx.backgrounds[x].x1 = 0;
+                gfx.backgrounds[x].x2 = scaledWidth;
             }
+            
+            gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+            gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+            
+            if (gfx.backgrounds[x].x1 < -scaledWidth) {
+                gfx.backgrounds[x].x1 = scaledWidth;
+            }
+
+            if (gfx.backgrounds[x].x2 < -scaledWidth) {
+                gfx.backgrounds[x].x2 = scaledWidth;
+            }
+
+            image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
+            image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
+        }
 
             cam.set();
             track.draw();
@@ -242,6 +240,20 @@ function draw() {
                 image(img, scaledWidth / 2 + i * 40 - 16, 120);
             }
 
+            // countdown
+            if (gameTime - player.startTime < player.startMaxTime) {
+                textSize(96);
+                fill(Koji.config.colors.gameCountdownColor)
+                text(ceil(player.startMaxTime - (gameTime - player.startTime)), scaledWidth / 2, scaledHeight / 2);
+            }
+
+            let bothActive = gameTime - player.shieldTime < player.shieldMaxTime && gameTime - player.speedTime < player.speedMaxTime;
+            
+            // shield notification
+            if (bothActive) {
+                translate(-120, 0);
+            }
+
             // shield notification
             if (gameTime - player.shieldTime < player.shieldMaxTime) {
                 textSize(48);
@@ -254,6 +266,25 @@ function draw() {
                 noStroke();
                 fill(Koji.config.colors.shieldProgressBarColor);
                 let t = 1 - (gameTime - player.shieldTime) / player.shieldMaxTime;
+                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200 * t, 16);
+            }
+
+            // speed notification
+            if (bothActive) {
+                translate(240, 0);
+            }
+
+            if (gameTime - player.speedTime < player.speedMaxTime) {
+                textSize(48);
+                fill(Koji.config.colors.speedProgressBarColor)
+                text(Koji.config.strings.speedText, scaledWidth / 2, scaledHeight - 64);
+                stroke(Koji.config.colors.speedProgressBarColor);
+                strokeWeight(2);
+                noFill();
+                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200, 16);
+                noStroke();
+                fill(Koji.config.colors.speedProgressBarColor);
+                let t = 1 - (gameTime - player.speedTime) / player.speedMaxTime;
                 rect(scaledWidth / 2 - 100, scaledHeight - 32, 200 * t, 16);
             }
             pop();
