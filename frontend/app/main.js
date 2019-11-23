@@ -198,28 +198,26 @@ function draw() {
             break;
         case 'playing':
         case 'gameOver':
-           console.log('c', cam);
-           
-           for (let x = 0; x < gfx.backgrounds.length; x++) {
-            if (typeof gfx.backgrounds[x].x1 === 'undefined') {
-                gfx.backgrounds[x].x1 = 0;
-                gfx.backgrounds[x].x2 = scaledWidth;
-            }
-            
-            gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-            gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-            
-            if (gfx.backgrounds[x].x1 < -scaledWidth) {
-                gfx.backgrounds[x].x1 = scaledWidth;
-            }
+            for (let x = 0; x < gfx.backgrounds.length; x++) {
+                if (typeof gfx.backgrounds[x].x1 === 'undefined') {
+                    gfx.backgrounds[x].x1 = 0;
+                    gfx.backgrounds[x].x2 = scaledWidth;
+                }
+                
+                gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
+                
+                if (gfx.backgrounds[x].x1 < -scaledWidth) {
+                    gfx.backgrounds[x].x1 = scaledWidth;
+                }
 
-            if (gfx.backgrounds[x].x2 < -scaledWidth) {
-                gfx.backgrounds[x].x2 = scaledWidth;
-            }
+                if (gfx.backgrounds[x].x2 < -scaledWidth) {
+                    gfx.backgrounds[x].x2 = scaledWidth;
+                }
 
-            image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
-            image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
-        }
+                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
+                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
+            }
 
             cam.set();
             track.draw();
