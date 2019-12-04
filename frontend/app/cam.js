@@ -1,9 +1,11 @@
 
-var cam = { x: 0, y: 0 };
+var cam = { x: 0, y: 0, scale: 1 };
 
 cam.set = function () {
     push();
-    translate(scaledWidth / 2 - cam.x, scaledHeight / 2 - cam.y);
+    translate(targetWidth / 2, targetHeight / 2);
+    scale(cam.scale);
+    translate(-cam.x, -cam.y);
 }
 
 cam.reset = function () {

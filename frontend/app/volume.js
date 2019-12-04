@@ -5,12 +5,14 @@ volume.load = function () {
     volume.muted = false;
     volume.w = 75;
     volume.h = 75;
-    volume.x = scaledWidth - 30 - volume.w;
+    let rightX = targetWidth / 2 + width / scaleFactor / 2;
+    volume.x = rightX - 30 - volume.w;
     volume.y = 30;
 }
 
 volume.update = function (dt) {
-    volume.x = scaledWidth - 30 - volume.w;
+    let rightX = targetWidth / 2 + width / scaleFactor / 2;
+    volume.x = rightX - 30 - volume.w;
     if (utils.mouseInRect(volume)) {
         document.body.style.cursor = 'pointer';
     }
@@ -29,5 +31,5 @@ volume.mousePressed = function () {
 }
 
 volume.draw = function () {
-    image(volume.muted ? gfx.speakerMute : gfx.speaker, volume.x, volume.y, volume.w, volume.h);
+    image(volume.muted ? gfx.speakerMuteWhite : gfx.speakerWhite, volume.x, volume.y, volume.w, volume.h);
 }

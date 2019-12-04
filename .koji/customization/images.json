@@ -1,37 +1,14 @@
 {
   "images": {
-    "backgrounds": [
-      {
-        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/owdvx-sky.png",
-        "scroll": 0
-      },
-      {
-        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/hke0r-rocks_3.png",
-        "scroll": 0.1
-      },
-      {
-        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/zcktx-rocks_2.png",
-        "scroll": 0.2
-      },
-      {
-        "image": "https://images.koji-cdn.com/4d8898c3-0017-439c-bc63-bba3fa9f48ef/bqkx4-clouds_2.png",
-        "scroll": 0.3
-      }
-    ],
-    "sound": "https://i.ibb.co/89Gp52x/speaker.png",
-    "soundMute": "https://i.ibb.co/Qj4yPGf/speaker-Mute.png",
+    "sound": "https://i.ibb.co/QP9STH5/speaker-White.png",
+    "soundMute": "https://i.ibb.co/NngrhH9/speaker-Mute-White.png",
     "background": "",
-    "player": "https://i.ibb.co/tYwrNT3/image.png",
-    "playerMoving": "https://i.ibb.co/tYwrNT3/image.png",
-    "tile": "https://i.ibb.co/NsS3KgC/tile.png",
-    "heart": "https://i.ibb.co/2nKYDyY/heart.png",
-    "heartGrey": "https://i.ibb.co/2t6VWjC/heart-Grey.png",
-    "pointPickup": "https://i.ibb.co/3cg8c55/star.png",
-    "speedPickup": "https://i.ibb.co/k9y1ScK/speed.png",
-    "info": "https://i.ibb.co/DYVDFqF/info.png",
-    "shield": "https://i.ibb.co/HKKfKQg/shield.png",
-    "obstacle": "https://i.ibb.co/ZWhjWc6/tnt.png",
-    "obstacleExplosion": "https://i.ibb.co/KXF3V5K/tnt-Explosion.png"
+    "arrow": "https://i.ibb.co/q74MDnV/arrow.png",
+    "ball": "https://i.ibb.co/W5QJ2h1/ball.png",
+    "powerline": "https://i.ibb.co/dm6Bjqb/power-Line.png",
+    "stadium1": "https://i.ibb.co/Rpcp3W1/stadium1.jpg",
+    "stadium2": "https://i.ibb.co/wYXLqVY/stadium2.png",
+    "stadium3": "https://i.ibb.co/yNskxTR/stadium3.png"
   },
   "@@editor": [
     {
@@ -40,28 +17,6 @@
       "icon": "💪🏻",
       "source": "images.json",
       "fields": [
-        {
-          "key": "backgrounds",
-          "name": "Backgrounds",
-          "type": "object<Background>[]",
-          "typeOptions": {
-            "Background": {
-              "image": {
-                "name": "Image",
-                "type": "image"
-              },
-              "scroll": {
-                "name": "Scroll",
-                "type": "range",
-                "typeOptions": {
-                  "min": 0,
-                  "max": 1,
-                  "step": 0.1
-                }
-              }
-            }
-          }
-        },
         {
           "key": "sound",
           "name": "Sound On",
@@ -81,69 +36,33 @@
           "type": "image"
         },
         {
-          "key": "player",
-          "name": "Player",
-          "description": "Player image. Square: 500x500",
+          "key": "arrow",
+          "name": "Arrow Image",
           "type": "image"
         },
         {
-          "key": "playerMoving",
-          "name": "Player Moving",
-          "description": "Player image when moving. Square: 500x500",
+          "key": "powerline",
+          "name": "Powerline Image",
           "type": "image"
         },
         {
-          "key": "tile",
-          "name": "Tile image",
-          "description": "Tile image that makes platform. Square: 250x250",
+          "key": "ball",
+          "name": "Ball Image",
           "type": "image"
         },
         {
-          "key": "heart",
-          "name": "Heart",
-          "description": "Heart image. Square: 100x100",
+          "key": "stadium1",
+          "name": "Stage 1 background Image",
           "type": "image"
         },
         {
-          "key": "heartGrey",
-          "name": "Heart Grey",
-          "description": "Grey Heart image. Square: 100x100",
+          "key": "stadium2",
+          "name": "Stage 2 background Image",
           "type": "image"
         },
         {
-          "key": "pointPickup",
-          "name": "Point Pickup",
-          "description": "Pickup that gives points. Star image recommended. Square: 200x200",
-          "type": "image"
-        },
-        {
-          "key": "speedPickup",
-          "name": "Speed Pickup",
-          "description": "Pickup that gives speed. Square: 200x200",
-          "type": "image"
-        },
-        {
-          "key": "info",
-          "name": "Info",
-          "description": "Instructions banner image. Rectangle preferred. Ideal Size: 700x150",
-          "type": "image"
-        },
-        {
-          "key": "shield",
-          "name": "Shield",
-          "description": "Shield image. Square: 500x500",
-          "type": "image"
-        },
-        {
-          "key": "obstacle",
-          "name": "Obstacle",
-          "description": "Obstacle image. Square: 500x500",
-          "type": "image"
-        },
-        {
-          "key": "obstacleExplosion",
-          "name": "Obstacle Explosion",
-          "description": "Image that appears after hitting the obstacle. Square: 500x500",
+          "key": "stadium3",
+          "name": "Stage 3 background Image",
           "type": "image"
         }
       ]

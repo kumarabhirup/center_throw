@@ -1,27 +1,25 @@
 {
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
-    "title": "Run N Switch",
-    "playerSize": 75,
-    "playerMoveSpeed": 750,
-    "gravitySpeed": 1100,
-    "shieldDuration": 15,
-    "speedDuration": 5,
-    "speedMultiplication": 1.5,
-    "gameCountdown": 3,
-    "desktop_instructions1": "Switch the gravity to save the player!",
-    "desktop_instructions2": "Hit Spacebar to switch!",
-    "desktop_instructions3": "Don't hit bombs and keep running!",
-    "mobile_instructions1": "Switch the gravity to save player!",
-    "mobile_instructions2": "Touch to switch!",
-    "mobile_instructions3": "Don't hit bombs and keep running!",
+    "title": "Michigan Kicker",
+    "desktop_instructions1": "Kick the ball and score the maximum!",
+    "desktop_instructions2": "Press spacebar on the right time...",
+    "desktop_instructions3": "The more centered you aim, the more you score!",
+    "mobile_instructions1": "Kick the ball and score the maximum!",
+    "mobile_instructions2": "Tap on the right time...",
+    "mobile_instructions3": "The more centered you aim, the more you score!",
     "defaultPlayerName": "Enter your name",
     "playButtonText": "PLAY NOW",
     "leaderboardButtonText": "LEADERBOARD",
+    "stageText": "STAGE",
+    "scoreText": "SCORE",
+    "poleHitText": "POLE HIT!",
+    "wideLeftText": "WIDE LEFT!",
+    "wideRightText": "WIDE RIGHT!",
+    "score100Text": "NOT BAD!",
+    "score200Text": "GOOD!",
+    "score300Text": "SUPERB!",
     "gameOverText": "GAME OVER",
-    "shieldText": "SHIELD",
-    "speedText": "SPEED",
-    "gameStartedFloatingText": "Game started!",
     "emailInputEnabled": false,
     "mainMenuBackgroundSize": ""
   },
@@ -43,78 +41,6 @@
           "name": "Game Title",
           "description": "The title that is displayed in the start menu",
           "type": "text"
-        },
-        {
-          "key": "playerSize",
-          "name": "Player Size",
-          "type": "range",
-          "typeOptions": {
-            "min": 50,
-            "max": 150,
-            "step": 2
-          }
-        },
-        {
-          "key": "playerMoveSpeed",
-          "name": "Player Movement Speed",
-          "type": "range",
-          "typeOptions": {
-            "min": 500,
-            "max": 1250,
-            "step": 2
-          }
-        },
-        {
-          "key": "gravitySpeed",
-          "name": "Gravity Speed",
-          "description": "Speed at which player switches/flips.",
-          "type": "range",
-          "typeOptions": {
-            "min": 700,
-            "max": 2000,
-            "step": 2
-          }
-        },
-        {
-          "key": "shieldDuration",
-          "name": "Shield Duration",
-          "type": "range",
-          "typeOptions": {
-            "min": 4,
-            "max": 25,
-            "step": 1
-          }
-        },
-        {
-          "key": "speedDuration",
-          "name": "Speed Duration",
-          "type": "range",
-          "typeOptions": {
-            "min": 1,
-            "max": 20,
-            "step": 1
-          }
-        },
-        {
-          "key": "speedMultiplication",
-          "name": "Speed Multiplication",
-          "type": "range",
-          "typeOptions": {
-            "min": 0.5,
-            "max": 2.5,
-            "step": 0.1
-          }
-        },
-        {
-          "key": "gameCountdown",
-          "name": "Game Time Countdown",
-          "description": "0 for no countdown.",
-          "type": "range",
-          "typeOptions": {
-            "min": 0,
-            "max": 5,
-            "step": 1
-          }
         },
         {
           "key": "desktop_instructions1",
@@ -177,6 +103,46 @@
         {
           "key": "speedText",
           "name": "Speed Text",
+          "type": "text"
+        },
+        {
+          "key": "stageText",
+          "name": "Stage Text",
+          "type": "text"
+        },
+        {
+          "key": "scoreText",
+          "name": "Stage Text",
+          "type": "text"
+        },
+        {
+          "key": "poleHitText",
+          "name": "Pole Hit Text",
+          "type": "text"
+        },
+        {
+          "key": "wideLeftText",
+          "name": "Wide Left Text",
+          "type": "text"
+        },
+        {
+          "key": "wideRightText",
+          "name": "Wide Right Text",
+          "type": "text"
+        },
+        {
+          "key": "score100Text",
+          "name": "Score 100 Text",
+          "type": "text"
+        },
+        {
+          "key": "score200Text",
+          "name": "Score 200 Text",
+          "type": "text"
+        },
+        {
+          "key": "score300Text",
+          "name": "Score 300 Text",
           "type": "text"
         },
         {

@@ -9,10 +9,8 @@ gameOver.load = function () {
 }
 
 gameOver.resetGame = function () {
-    player.load();
-    track.load();
-    info.load();
-    cam.x = 0;
+    gameTime = 0;
+    game.load();
 }
 
 gameOver.update = function (dt) {
@@ -26,22 +24,28 @@ gameOver.update = function (dt) {
 
 gameOver.mousePressed = function () {
     gameState = 'playing';
-    window.setScore(player.score);
+    window.setScore(game.score);
     gameOver.resetGame();
     gameOver.load();
+    sfx.stadium.stop();
     window.setAppView('setScore');
 }
 
-gameOver.draw = function() {
+gameOver.draw = function () {
     push();
 
     fill(Koji.config.colors.gameOverRectangleColor);
-    rect(scaledWidth / 2 - gameOver.w / 2, gameOver.y, gameOver.w, gameOver.h);
+    rect(targetWidth / 2 - gameOver.w / 2, gameOver.y, gameOver.w, gameOver.h);
 
+    // game over text
     fill(Koji.config.colors.gameOverTextColor);
     textSize(48);
     textAlign(CENTER, CENTER);
-    text(Koji.config.strings.gameOverText, scaledWidth / 2, gameOver.y + gameOver.h / 2);
+    text(Koji.config.strings.gameOverText, targetWidth / 2, gameOver.y + 44);
+
+    // score
+    textSize(32);
+    text('SCORE: ' + game.score, targetWidth / 2, gameOver.y + 120);
 
     pop();
 }

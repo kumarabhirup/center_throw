@@ -2,8 +2,10 @@
 var gfx = {};
 var sfx = {};
 
+var targetWidth = 500;
+var targetHeight = 900;
 var scaleFactor;
-var scaledWidth, scaledHeight;
+var fullX, fullY, fullW, fullH;
 var scaledMouseX, scaledMouseY;
 var defaultVolume = 0.4;
 var uiPressed = false;
@@ -11,91 +13,55 @@ var gameState = 'playing';
 var gameTime = 0;
 var dtTimer = 0;
 
-var width = window.innerWidth;
-var height = window.innerHeight;
-
-let sndMusic;
-
 function preload() {
-    gfx.backgrounds = [];
-    
-    for (let x = 0; x < Koji.config.images.backgrounds.length; x++) {
-        gfx.backgrounds[x] = {};
-        gfx.backgrounds[x].img = loadImage(Koji.config.images.backgrounds[x].image);
-        gfx.backgrounds[x].scroll = Koji.config.images.backgrounds[x].scroll;
-    }
+    gfx.arrow = loadImage(Koji.config.images.arrow);
+    gfx.ball = loadImage(Koji.config.images.ball);
+    gfx.powerLine = loadImage(Koji.config.images.powerline)
+    gfx.speakerMuteWhite = loadImage(Koji.config.images.soundMute);
+    gfx.speakerWhite = loadImage(Koji.config.images.sound);
+    gfx.stadium1 = loadImage(Koji.config.images.stadium1);
+    gfx.stadium2 = loadImage(Koji.config.images.stadium2);
+    gfx.stadium3 = loadImage(Koji.config.images.stadium3);
 
-    gfx.player = loadImage(Koji.config.images.player);
-    gfx.playerMoving = loadImage(Koji.config.images.playerMoving);
-    gfx.heart = loadImage(Koji.config.images.heart);
-    gfx.heartGrey = loadImage(Koji.config.images.heartGrey);
-    gfx.tile = loadImage(Koji.config.images.tile);
-    gfx.star = loadImage(Koji.config.images.pointPickup);
-    gfx.tnt = loadImage(Koji.config.images.obstacle);
-    gfx.tntExplosion = loadImage(Koji.config.images.obstacleExplosion);
-    gfx.shield = loadImage(Koji.config.images.shield);
-    gfx.speed = loadImage(Koji.config.images.speedPickup);
-    
-    gfx.info = loadImage(Koji.config.images.info);
-    gfx.speaker = loadImage(Koji.config.images.sound);
-    gfx.speakerMute = loadImage(Koji.config.images.soundMute);
+    sfx.stadium = loadSound(Koji.config.sounds.backgroundMusic);
+    sfx.stadium.setLoop(true);
+    sfx.stadium.setVolume(0.2);
 
-    sfx.star = loadSound(Koji.config.sounds.pointPickup);
-    sfx.jump = loadSound(Koji.config.sounds.jump);
-    sfx.fall = loadSound(Koji.config.sounds.fall);
-    sfx.explosion = loadSound(Koji.config.sounds.obstacleHit);
+    sfx.boo = loadSound(Koji.config.sounds.boo);
+    sfx.clap = loadSound(Koji.config.sounds.clap);
+    sfx.whoosh = loadSound(Koji.config.sounds.whoosh);
+    sfx.impact = loadSound(Koji.config.sounds.impact);
+
     masterVolume(defaultVolume);
 }
 
 function setup() {
-    const canvas = createCanvas(window.innerWidth, window.innerHeight)
-
-    // $('canvas').bind('contextmenu', function (e) {
-    //     return false;
-    // });
-    // $('canvas').bind('mousedown', function (e) {
-    //     if (e.detail > 1) {
-    //         e.preventDefault();
-    //     }
-    // });
+    let canvas = createCanvas(window.innerWidth, window.innerHeight);
 
     strokeJoin(ROUND);
-    scaleFactor = height / 900;
-    scaledWidth = width / scaleFactor;
-    scaledHeight = height / scaleFactor;
+    scaleFactor = min(width / targetWidth, height / targetHeight);
+    fullW = width / scaleFactor;
+    fullH = height / scaleFactor;
+    fullX = targetWidth / 2 - fullW / 2;
+    fullY = targetHeight / 2 - fullH / 2;
 
     menu.load();
-    player.load();
-    track.load();
-    info.load();
-    gameOver.load();
     volume.load();
+    game.load();
+    popupText.load();
+    gameOver.load();
 
-    // Sound stuffs
-    function playMusic(music, volume = 0.4, loop = false) {
-        if (music) {
-            music.setVolume(volume)
-            music.setLoop(loop)
-            music.play()
-        }
-    }
+    cam.x = targetWidth / 2;
+    cam.y = targetHeight / 2;
 
-    /**
-     * Load music asynchronously and play once it's loaded
-     * This way the game will load faster
-     */
-    if (Koji.config.sounds.backgroundMusic)
-        sndMusic = loadSound(Koji.config.sounds.backgroundMusic, () =>
-        playMusic(sndMusic, 0.2, true)
-    )
-
-    cam.y = -(7 * track.tileSize) / 2;
+    sfx.stadium.play()
+    game.start()
 }
 
 function update() {
     document.body.style.cursor = 'default';
-    scaledMouseX = (mouseX - width / 2) / scaleFactor + scaledWidth / 2;
-    scaledMouseY = (mouseY - height / 2) / scaleFactor + scaledHeight / 2;
+    scaledMouseX = (mouseX - width / 2) / scaleFactor + targetWidth / 2;
+    scaledMouseY = (mouseY - height / 2) / scaleFactor + targetHeight / 2;
     let fixedDt = 1 / 60;
     dtTimer += min(1 / frameRate(), 1 / 10);
     while (dtTimer > 0) {
@@ -108,48 +74,33 @@ function fixedUpdate(dt) {
     switch (gameState) {
         case 'menu':
             menu.update(dt);
+            volume.update(dt);
             break;
         case 'playing':
             gameTime += dt;
-            player.update(dt);
-            track.update(dt);
-            info.update(dt);
-            gameOver.update(dt);
             volume.update(dt);
+            game.update(dt);
+            popupText.update(dt);
             break;
         case 'gameOver':
-            gameTime += dt;
-            player.update(dt);
-            info.update(dt);
-            gameOver.update(dt);
             volume.update(dt);
+            gameOver.update(dt);
+            popupText.update(dt);
             break;
     }
-}
-
-function updateMouse() {
-    scaledMouseX = (mouseX - width / 2)
-    scaledMouseX /= scaleFactor
-    scaledMouseX += scaledWidth / 2;
-    scaledMouseX -= (scaledWidth - targetWidth) / 2;
-
-    scaledMouseY = (mouseY - height / 2)
-    scaledMouseY /= scaleFactor
-    scaledMouseY += scaledHeight / 2;
-    scaledMouseY -= (scaledHeight - targetHeight) / 2
 }
 
 function mousePressed() {
     uiPressed = false;
     switch (gameState) {
         case 'menu':
-            volume.mousePressed();
             menu.mousePressed();
+            volume.mousePressed();
             break;
         case 'playing':
             volume.mousePressed();
             if (!uiPressed) {
-                player.mousePressed();
+                game.mousePressed();
             }
             break;
         case 'gameOver':
@@ -157,7 +108,6 @@ function mousePressed() {
             if (!uiPressed) {
                 gameOver.mousePressed();
             }
-            break;
     }
 }
 function touchStarted() {
@@ -178,129 +128,104 @@ function touchEnded() {
 function keyPressed() {
     switch (gameState) {
         case 'playing':
-            player.keyPressed();
+            game.keyPressed();
             break;
     }
 }
 
 function draw() {
     update();
-    noStroke();
-    
+    noStroke()
+
     push();
     translate(width / 2, height / 2);
     scale(scaleFactor, scaleFactor);
-    translate(-scaledWidth / 2, -scaledHeight / 2);
+    translate(-targetWidth / 2, -targetHeight / 2);
+
+    background('#1F1F1F');
 
     switch (gameState) {
         case 'menu':
             menu.draw();
+            volume.draw();
             break;
         case 'playing':
         case 'gameOver':
-            for (let x = 0; x < gfx.backgrounds.length; x++) {
-                if (typeof gfx.backgrounds[x].x1 === 'undefined') {
-                    gfx.backgrounds[x].x1 = 0;
-                    gfx.backgrounds[x].x2 = scaledWidth;
-                }
-                
-                if (gameTime - player.startTime > player.startMaxTime) {
-                    gfx.backgrounds[x].x1 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                    gfx.backgrounds[x].x2 -= player.lives === 0 ? 0 : player.xv * 0.03 * gfx.backgrounds[x].scroll;
-                }
-
-                if (gfx.backgrounds[x].x1 < -scaledWidth) {
-                    gfx.backgrounds[x].x1 = scaledWidth;
-                }
-
-                if (gfx.backgrounds[x].x2 < -scaledWidth) {
-                    gfx.backgrounds[x].x2 = scaledWidth;
-                }
-
-                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x1, 0, scaledWidth, scaledHeight);
-                image(gfx.backgrounds[x].img, gfx.backgrounds[x].x2, 0, scaledWidth, scaledHeight);
-            }
-
             cam.set();
-            track.draw();
-            player.draw();
+
+            let bg = game.stages[game.stage].background;
+            let h = targetHeight;
+            let w = bg.width * h / bg.height;
+            image(bg, targetWidth / 2 - w / 2, 0, w, h);
+            fill(0, 128);
+            rect(targetWidth / 2 - w / 2, 0, w, h);
+            
+            game.draw();
+            popupText.draw();
+
             cam.reset();
 
             push();
+            // numBalls
+            fill(0);
+            for (let i = 0; i < game.numBalls; i++) {
+                push();
+                translate(targetWidth - 30 - i * 20, targetHeight - 26);
+                rotate(PI / 5);
+                image(gfx.ball, -12, -18, 24, 36);
+                pop();
+            }
 
+            // scoreboard
+            fill(Koji.config.colors.scoreboardBackgroundColor);
+            rect(targetWidth / 2 - 230 / 2, 0, 230, 135);
+            stroke(58);
+            strokeWeight(2);
+            line(targetWidth / 2 - 186 / 2, 50, targetWidth / 2 + 186 / 2, 50);
+            line(targetWidth / 2 - 186 / 2, 84, targetWidth / 2 + 186 / 2, 84);
+            noStroke();
+            // time
+            fill(Koji.config.colors.scoreboardTextColor);
+            textSize(30);
+            textAlign(LEFT, TOP);
+            let sMinutes = String(floor(gameTime / 60)).padStart(2, '0');
+            let sSeconds = String(floor(gameTime % 60)).padStart(2, '0');
+            text(sMinutes + ':' + sSeconds, targetWidth / 2 - (textWidth(sMinutes) + textWidth(':') / 2), 11);
+            // stage/score labels
+            textSize(15);
+            textAlign(CENTER, TOP);
+            text(Koji.config.strings.stageText, targetWidth / 2 - 50, 60);
+            text(Koji.config.strings.scoreText, targetWidth / 2 + 50, 60);
+            // stage
+            textSize(30);
+            text(game.stage + 1, targetWidth / 2 - 50, 93);
             // score
-            fill(Koji.config.colors.scoreColor);
-            textSize(64);
-            textAlign(CENTER, CENTER);
-            text(player.score, scaledWidth / 2, 80);
-
-            // hp
-            for (let i = -1; i <= 1; i++) {
-                let img = i + 1 < player.lives ? gfx.heart : gfx.heartGrey;
-                image(img, scaledWidth / 2 + i * 40 - 16, 120);
-            }
-
-            // countdown
-            if (gameTime - player.startTime < player.startMaxTime) {
-                textSize(96);
-                fill(Koji.config.colors.gameCountdownColor)
-                text(ceil(player.startMaxTime - (gameTime - player.startTime)), scaledWidth / 2, scaledHeight / 2);
-            }
-
-            let bothActive = gameTime - player.shieldTime < player.shieldMaxTime && gameTime - player.speedTime < player.speedMaxTime;
-            
-            // shield notification
-            if (bothActive) {
-                translate(-120, 0);
-            }
-
-            // shield notification
-            if (gameTime - player.shieldTime < player.shieldMaxTime) {
-                textSize(48);
-                fill(Koji.config.colors.shieldProgressBarColor)
-                text(Koji.config.strings.shieldText, scaledWidth / 2, scaledHeight - 64);
-                stroke(Koji.config.colors.shieldProgressBarColor);
-                strokeWeight(2);
-                noFill();
-                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200, 16);
-                noStroke();
-                fill(Koji.config.colors.shieldProgressBarColor);
-                let t = 1 - (gameTime - player.shieldTime) / player.shieldMaxTime;
-                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200 * t, 16);
-            }
-
-            // speed notification
-            if (bothActive) {
-                translate(240, 0);
-            }
-
-            if (gameTime - player.speedTime < player.speedMaxTime) {
-                textSize(48);
-                fill(Koji.config.colors.speedProgressBarColor)
-                text(Koji.config.strings.speedText, scaledWidth / 2, scaledHeight - 64);
-                stroke(Koji.config.colors.speedProgressBarColor);
-                strokeWeight(2);
-                noFill();
-                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200, 16);
-                noStroke();
-                fill(Koji.config.colors.speedProgressBarColor);
-                let t = 1 - (gameTime - player.speedTime) / player.speedMaxTime;
-                rect(scaledWidth / 2 - 100, scaledHeight - 32, 200 * t, 16);
-            }
+            let t = constrain((game.kickAnimationTimer - 1) * 2, 0, 1);
+            let shownScore = floor(lerp(game.lastScore, game.score, ease.inOutCubic(t)));
+            text(shownScore, targetWidth / 2 + 50, 93);
             pop();
 
-            info.draw();
-            gameOver.draw();
+            if (gameState === 'gameOver'){
+                gameOver.draw();
+            }
+            
             volume.draw();
             break;
     }
+
+    // cover top/bottom off-screen graphics
+    fill('#1F1F1F');
+    rect(fullX, fullY, fullW, 0 - fullY);
+    rect(fullX, targetHeight, fullW, fullY + fullH - targetHeight);
 
     pop();
 }
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-    scaleFactor = height / 900;
-    scaledWidth = width / scaleFactor;
-    scaledHeight = height / scaleFactor;
+    scaleFactor = min(width / targetWidth, height / targetHeight);
+    fullW = width / scaleFactor;
+    fullH = height / scaleFactor;
+    fullX = targetWidth / 2 - fullW / 2;
+    fullY = targetHeight / 2 - fullH / 2;
 }

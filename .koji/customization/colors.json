@@ -13,6 +13,8 @@
     "playButtonClickColor": "#ffda5a",
     "buttonHoverColor": "#23bcc5",
     "buttonClickColor": "#2CECF5",
+    "scoreboardTextColor": "#E51C23",
+    "scoreboardBackgroundColor": "#000000",
     "gameOverRectangleColor": "#0a0a31",
     "gameOverTextColor": "#ffffff",
     "shieldProgressBarColor": "#000000",
@@ -84,6 +86,16 @@
         {
           "key": "buttonClickColor",
           "name": "Button Click Color",
+          "type": "color"
+        },
+        {
+          "key": "scoreboardTextColor",
+          "name": "Scoreboard Text Color",
+          "type": "color"
+        },
+        {
+          "key": "scoreboardBackgroundColor",
+          "name": "Scoreboard Background Color",
           "type": "color"
         },
         {

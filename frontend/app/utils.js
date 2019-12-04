@@ -3,8 +3,11 @@ var utils = {
     mouseInRect: function (r) {
         return scaledMouseX > r.x && scaledMouseX < r.x + r.w && scaledMouseY > r.y && scaledMouseY < r.y + r.h;
     },
-    hash: function(x, y) {
+    hash: function (x, y) {
         return abs(sin(x * 12.9898 + y * 4.1414) * 43758.5453) % 1;
+    },
+    pingPong: function(t) {
+        return t % 2 < 1 ? t % 1 : 1 - t % 1;
     }
 }
 

@@ -13,10 +13,9 @@ class GameContainer extends Component {
     require('script-loader!app/utils.js')
     require('script-loader!app/main.js')
     require('script-loader!app/menu.js')
+    require('script-loader!app/game.js')
     require('script-loader!app/cam.js')
-    require('script-loader!app/player.js')
-    require('script-loader!app/track.js')
-    require('script-loader!app/info.js')
+    require('script-loader!app/popupText.js')
     require('script-loader!app/gameOver.js')
     require('script-loader!app/volume.js')
 
@@ -47,9 +46,9 @@ class GameContainer extends Component {
   }
 
   componentWillUnmount() {
-    if (sndMusic && sndMusic.isPlaying()) {
-      sndMusic.dispose()
-    }
+    // if (sndMusic && sndMusic.isPlaying()) {
+    //   sndMusic.dispose()
+    // }
 
     this.p5Game.remove()
   }
