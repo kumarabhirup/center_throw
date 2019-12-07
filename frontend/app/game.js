@@ -25,9 +25,9 @@ game.load = function() {
             aimHeight: 375,
             shift: 0,
             poleColor: color('#C2D72E'),
-            redColor: color('#C37969'),
-            yellowColor: color('#FCECA4'),
-            greenColor: color('#5D974D')
+            redColor: color('#C3796990'),
+            yellowColor: color('#FCECA490'),
+            greenColor: color('#5D974D90')
         }
     ];
     // define goal sizes as percentages of aim area
