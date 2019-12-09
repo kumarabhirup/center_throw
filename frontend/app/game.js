@@ -292,15 +292,17 @@ game.draw = function() {
     {
         let p = game.projectPoint(game.x * sv.aimWidth / 2, game.y * sv.aimHeight / 2);
         let x = lerp(0, p.x, t);
-        let y = lerp(350, p.y, ease.outQuad(utils.pingPong(t)));
+        let y = lerp(350, p.y, ease.inOutQuad(utils.pingPong(t)));
         let w = 75 / (t * 3 + 1);
-        let h = lerp(0.1, w * 5 / 3, cos(t * PI * 4) * 0.5 + 0.5);
+        //let h = lerp(0.1, w * 5 / 3, cos(t * PI * 4) * 0.5 + 0.5);
+        let h = w * 5 / 3;
         // bounce back if pole hit
         if (t > 1 && game.isPoleHit()) {
             w = 75 / ((2 - t) * 3 + 1);
         }
         let endAngle = lerp(0, PI / 8, game.x);
         let angle = lerp(0, endAngle, min(t, 1));
+        angle += sin(t * 8) * PI / 8;
         let alpha = lerp(255, 0, constrain((t - 1) * 1.5, 0, 1));
         push();
         translate(x, y);

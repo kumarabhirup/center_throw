@@ -10,6 +10,7 @@ gameOver.load = function () {
 
 gameOver.resetGame = function () {
     gameTime = 0;
+    countdownTimer = 3;
     game.load();
 }
 

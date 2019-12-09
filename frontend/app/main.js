@@ -12,6 +12,9 @@ var uiPressed = false;
 var gameState = 'playing';
 var gameTime = 0;
 var dtTimer = 0;
+var fixedDt = 1 / 60;
+
+var countdownTimer = 3;
 
 function preload() {
     gfx.arrow = loadImage(Koji.config.images.arrow);
@@ -22,6 +25,8 @@ function preload() {
     gfx.stadium1 = loadImage(Koji.config.images.stadium1);
     gfx.stadium2 = loadImage(Koji.config.images.stadium2);
     gfx.stadium3 = loadImage(Koji.config.images.stadium3);
+    gfx.logo1 = loadImage(Koji.config.images.sponsorship.left);
+    gfx.logo2 = loadImage(Koji.config.images.sponsorship.right);
 
     sfx.stadium = loadSound(Koji.config.sounds.backgroundMusic);
     sfx.stadium.setLoop(true);
@@ -62,13 +67,21 @@ function update() {
     document.body.style.cursor = 'default';
     scaledMouseX = (mouseX - width / 2) / scaleFactor + targetWidth / 2;
     scaledMouseY = (mouseY - height / 2) / scaleFactor + targetHeight / 2;
-    let fixedDt = 1 / 60;
-    dtTimer += min(1 / frameRate(), 1 / 10);
+
+    let dt = min(1 / frameRate(), 1 / 10);
+    dtTimer += dt;
     while (dtTimer > 0) {
         dtTimer -= fixedDt;
         fixedUpdate(fixedDt);
     }
+
+    if (touchIsPressed) {
+        touchTimer = 0;
+    } else {
+        touchTimer += dt;
+    }
 }
+
 
 function fixedUpdate(dt) {
     switch (gameState) {
@@ -77,9 +90,12 @@ function fixedUpdate(dt) {
             volume.update(dt);
             break;
         case 'playing':
-            gameTime += dt;
             volume.update(dt);
-            game.update(dt);
+            countdownTimer -= dt;
+            if (countdownTimer < 0) {
+                gameTime += dt;
+                game.update(dt);
+            }
             popupText.update(dt);
             break;
         case 'gameOver':
@@ -90,7 +106,7 @@ function fixedUpdate(dt) {
     }
 }
 
-function mousePressed() {
+function pressed() {
     uiPressed = false;
     switch (gameState) {
         case 'menu':
@@ -99,7 +115,7 @@ function mousePressed() {
             break;
         case 'playing':
             volume.mousePressed();
-            if (!uiPressed) {
+            if (!uiPressed && countdownTimer < 0) {
                 game.mousePressed();
             }
             break;
@@ -110,18 +126,40 @@ function mousePressed() {
             }
     }
 }
+
+function released() {
+
+}
+
+var touchIsPressed = false;
+// used to disable mouse inputs if touch used in last 0.5 seconds
+var touchTimer = 1;
+
+function mousePressed() {
+    if (touchTimer > 0.5) {
+        pressed();
+    }
+}
 function touchStarted() {
     if (touches.length === 1) {
-        mousePressed();
+        touchIsPressed = true;
+        mouseX = touches[0].x;
+        mouseY = touches[0].y;
+        scaledMouseX = (mouseX - width / 2) / scaleFactor + targetWidth / 2;
+        scaledMouseY = (mouseY - height / 2) / scaleFactor + targetHeight / 2;
+        pressed();
     }
 }
 
 function mouseReleased() {
-
+    if (touchTimer > 0.5) {
+        released();
+    }
 }
 function touchEnded() {
     if (touches.length === 0) {
-        mouseReleased();
+        touchIsPressed = false;
+        released();
     }
 }
 
@@ -204,6 +242,30 @@ function draw() {
             let shownScore = floor(lerp(game.lastScore, game.score, ease.inOutCubic(t)));
             text(shownScore, targetWidth / 2 + 50, 93);
             pop();
+
+            // logos
+            {
+                let w = (targetWidth - 230) / 2;
+                let s = w / gfx.logo1.width;
+                let h = gfx.logo1.height * s;
+                let x = 0;
+                let y = 135 / 2 - h / 2;
+                image(gfx.logo1, x, y, w, h);
+
+                s = w / gfx.logo2.width;
+                h = gfx.logo2.height * s;
+                x = targetWidth / 2 + 230 / 2;
+                y = 135 / 2 - h / 2;
+                image(gfx.logo2, x, y, w, h);
+            }
+
+            // countdown
+            if (countdownTimer >= 0) {
+                fill(0);
+                textSize(lerp(64, 96, ease.outCubic(utils.pingPong(countdownTimer * 2))));
+                textAlign(CENTER, CENTER);
+                text(floor(countdownTimer) + 1, targetWidth / 2, targetHeight / 2);
+            }
 
             if (gameState === 'gameOver'){
                 gameOver.draw();
