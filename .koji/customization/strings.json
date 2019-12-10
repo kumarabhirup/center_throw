@@ -1,5 +1,17 @@
 {
   "strings": {
+    "levels": [
+      {
+        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/184p9-6003240fdffd413c99b89bd6834db57c.png",
+        "kicks": 1,
+        "position": "center"
+      },
+      {
+        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
+        "kicks": 3,
+        "position": "left"
+      }
+    ],
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
     "title": "Michigan Kicker",
     "desktop_instructions1": "Kick the ball and score the maximum!",
@@ -30,6 +42,54 @@
       "icon": "💡",
       "source": "strings.json",
       "fields": [
+        {
+          "key": "levels",
+          "type": "object<Level>[]",
+          "arrayOptions": {
+            "min": "1",
+            "addItemLabel": "Add Level"
+          },
+          "typeOptions": {
+            "Level": {
+              "background": {
+                "name": "Background Image",
+                "description": "The image for this level",
+                "type": "image"
+              },
+              "kicks": {
+                "name": "Kicks",
+                "description": "How many kicks for this level",
+                "type": "range",
+                "typeOptions": {
+                  "min": "1",
+                  "max": "10",
+                  "step": "1"
+                }
+              },
+              "position": {
+                "name": "Goalpost Position",
+                "type": "select",
+                "typeOptions": {
+                  "placeholder": "Choose a position...",
+                  "options": [
+                    {
+                      "value": "left",
+                      "label": "Left"
+                    },
+                    {
+                      "value": "center",
+                      "label": "Center"
+                    },
+                    {
+                      "value": "right",
+                      "label": "Right"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
         {
           "key": "fontFamily",
           "name": "Font Family",

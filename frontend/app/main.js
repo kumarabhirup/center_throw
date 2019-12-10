@@ -17,6 +17,12 @@ var fixedDt = 1 / 60;
 var countdownTimer = 3;
 
 function preload() {
+    // Kumar - Load the background images
+    gfx.backgroundImages = [];
+    Koji.config.strings.levels.forEach((level, idx) => {
+        gfx.backgroundImages[idx] =  loadImage(level.background);
+    });
+
     gfx.arrow = loadImage(Koji.config.images.arrow);
     gfx.ball = loadImage(Koji.config.images.ball);
     gfx.powerLine = loadImage(Koji.config.images.powerline)
@@ -206,7 +212,7 @@ function draw() {
             push();
             // numBalls
             fill(0);
-            for (let i = 0; i < game.numBalls; i++) {
+            for (let i = 0; i < game.stages[game.stage].numBalls; i++) {
                 push();
                 translate(targetWidth - 30 - i * 20, targetHeight - 26);
                 rotate(PI / 5);

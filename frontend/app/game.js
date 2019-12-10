@@ -11,44 +11,53 @@ game.load = function() {
     game.lastScore = 0;
     game.score = 0;
     game.stage = 0;
-    game.numBalls = 5;
     game.kickAnimationTimer = 0;
     game.spawnedReactionText = false;
     game.spawnedPointText = false;
 
-    game.stages = [
-        {
-            background: gfx.stadium1,
-            goalCenterX: targetWidth / 2,
-            goalCenterY: targetHeight / 2,
-            aimWidth: 500,
-            aimHeight: 375,
-            shift: 0,
-            poleColor: color('#C2D72E'),
-            redColor: color('#C3796990'),
-            yellowColor: color('#FCECA490'),
-            greenColor: color('#5D974D90')
-        }
-    ];
-    // define goal sizes as percentages of aim area
-    let s = game.stages[0];
-    s.redWidth = s.aimWidth * 0.5;
-    s.redHeight = s.aimHeight;
-    s.yellowWidth = s.redWidth * 0.6;
-    s.yellowHeight = s.redHeight * 0.6;
-    s.greenWidth = s.yellowWidth * 0.3;
-    s.greenHeight = s.yellowHeight * 0.3;
+    // Kumar - set the stages up
+    if (!game.stages) {
+        game.stages = Koji.config.strings.levels.map((level, idx) => {
+            const background = gfx.backgroundImages[idx];
+            const numBalls = level.kicks;
+            const aimWidth = 500;
+            const aimHeight = 375;
+            const redWidth = aimWidth * 0.5;
+            const redHeight = aimHeight;
+            const yellowWidth = redWidth * 0.6;
+            const yellowHeight = redHeight * 0.6;
+            const greenWidth = yellowWidth * 0.3;
+            const greenHeight = yellowHeight * 0.3;
 
-    // copy properties from first stage
-    game.stages[1] = Object.assign({}, game.stages[0]);
-    s = game.stages[1];
-    s.background = gfx.stadium2;
-    s.shift = 0.001;
+            let shift = 0;
+            if (level.position === 'left') {
+                shift = 0.001;
+            }
+            if (level.position === 'right') {
+                shift = -0.0001;
+            }
 
-    game.stages[2] = Object.assign({}, game.stages[0]);
-    s = game.stages[2];
-    s.background = gfx.stadium3;
-    s.shift = -0.001;
+            return {
+                background,
+                goalCenterX: targetWidth / 2,
+                goalCenterY: targetHeight / 2,
+                aimWidth,
+                aimHeight,
+                numBalls,
+                redWidth,
+                redHeight,
+                yellowHeight,
+                yellowWidth,
+                greenWidth,
+                greenHeight,
+                shift,
+                poleColor: color('#C2D72E'),
+                redColor: color('#C3796990'),
+                yellowColor: color('#FCECA490'),
+                greenColor: color('#5D974D90'),
+            };
+        });
+    }
 }
 
 game.start = function() {
@@ -106,7 +115,7 @@ game.update = function(dt) {
 
         // load next stage or ball if animation finished
         if (game.kickAnimationTimer > 2) {
-            if (game.numBalls <= 0) {
+            if (game.stages[game.stage].numBalls <= 0) {
                 if (game.stage >= game.stages.length - 1) {
                     gameState = 'gameOver';
                 } else {
@@ -121,12 +130,10 @@ game.update = function(dt) {
             } else {
                 let score = game.score;
                 let stage = game.stage;
-                let numBalls = game.numBalls;
                 game.load();
                 game.lastScore = score;
                 game.score = score;
                 game.stage = stage;
-                game.numBalls = numBalls;
                 game.start();
             }
         }
@@ -204,7 +211,7 @@ game.action = function() {
         game.yTime = gameTime;
     } else if (game.choosingY) {
         game.choosingY = false;
-        game.numBalls -= 1
+        game.stages[game.stage].numBalls -= 1;
         game.lastScore = game.score;
         game.score += game.getScoreFromPosition();
         sfx.whoosh.play();
