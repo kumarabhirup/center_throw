@@ -1,6 +1,6 @@
-# `Run N Switch`
+# `Kicker Mix`
 
-Start your day by flipping Spongebobs!
+Start your day by kicking soccer balls!
 
 ## ⚒️ Customizations
 
@@ -78,7 +78,7 @@ $ git push github master # <- only if you also maintain a GitHub Repository
 
 ## 🤙 Wanna contribute❓
 
-Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup/spongebob_switch)
+Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup)
 
 Or follow me and DM on [Twitter @kumar_abhirup](https://twitter.com/kumar_abhirup) 🙌
 
