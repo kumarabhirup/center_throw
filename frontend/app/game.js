@@ -34,7 +34,7 @@ game.load = function() {
                 shift = 0.001;
             }
             if (level.position === 'right') {
-                shift = -0.0001;
+                shift = -0.001;
             }
 
             return {
@@ -117,6 +117,7 @@ game.update = function(dt) {
         if (game.kickAnimationTimer > 2) {
             if (game.stages[game.stage].numBalls <= 0) {
                 if (game.stage >= game.stages.length - 1) {
+                    game.load();
                     gameState = 'gameOver';
                 } else {
                     let score = game.score;

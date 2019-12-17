@@ -8,8 +8,13 @@
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 3,
+        "kicks": 1,
         "position": "left"
+      },
+      {
+        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
+        "kicks": 1,
+        "position": "right"
       }
     ],
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
