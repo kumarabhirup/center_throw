@@ -12,6 +12,10 @@ gameOver.resetGame = function () {
     gameTime = 0;
     countdownTimer = 3;
     game.load();
+
+    Koji.config.strings.levels.forEach((level, index) => {
+        game.stages[index].numBalls = level.kicks
+    })
 }
 
 gameOver.update = function (dt) {

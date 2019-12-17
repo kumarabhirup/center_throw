@@ -15,7 +15,6 @@ game.load = function() {
     game.spawnedReactionText = false;
     game.spawnedPointText = false;
 
-    // Kumar - set the stages up
     if (!game.stages) {
         game.stages = Koji.config.strings.levels.map((level, idx) => {
             const background = gfx.backgroundImages[idx];
@@ -117,7 +116,6 @@ game.update = function(dt) {
         if (game.kickAnimationTimer > 2) {
             if (game.stages[game.stage].numBalls <= 0) {
                 if (game.stage >= game.stages.length - 1) {
-                    game.load();
                     gameState = 'gameOver';
                 } else {
                     let score = game.score;
