@@ -9,7 +9,7 @@ COPY . .
 
 # Run the init script to get our working directory set up if it needs to be
 RUN chmod +x ./.remy/scripts/init.sh
-RUN ./.remy/scripts/init.sh https://projects.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5.git
+RUN ./.remy/scripts/init.sh https://projects.koji-cdn.com/c22a2c5f-645a-432b-8c65-0511c36c57d7.git
 
 # Run install commands if we have them
 RUN npm install --prefix .remy
