@@ -3,18 +3,23 @@
     "levels": [
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/184p9-6003240fdffd413c99b89bd6834db57c.png",
-        "kicks": 1,
+        "kicks": 3,
         "position": "center"
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 1,
+        "kicks": 6,
         "position": "left"
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 1,
+        "kicks": 8,
         "position": "right"
+      },
+      {
+        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
+        "kicks": 10,
+        "position": "center"
       }
     ],
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
