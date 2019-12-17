@@ -4,22 +4,46 @@
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/184p9-6003240fdffd413c99b89bd6834db57c.png",
         "kicks": 3,
-        "position": "center"
+        "position": "center",
+        "colors": {
+          "poleColor": "#C2D72E",
+          "OutsiderGoalColor": "#C3796990",
+          "MiddleGoalColor": "#FCECA490",
+          "CenterGoalColor": "#5D974D90"
+        }
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
         "kicks": 6,
-        "position": "left"
+        "position": "left",
+        "colors": {
+          "poleColor": "#C2D72E",
+          "OutsiderGoalColor": "#C3796990",
+          "MiddleGoalColor": "#FCECA490",
+          "CenterGoalColor": "#5D974D90"
+        }
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
         "kicks": 8,
-        "position": "right"
+        "position": "right",
+        "colors": {
+          "poleColor": "#C2D72E",
+          "OutsiderGoalColor": "#C3796990",
+          "MiddleGoalColor": "#FCECA490",
+          "CenterGoalColor": "#5D974D90"
+        }
       },
       {
         "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
         "kicks": 10,
-        "position": "center"
+        "position": "center",
+        "colors": {
+          "poleColor": "#C2D72E",
+          "OutsiderGoalColor": "#C3796990",
+          "MiddleGoalColor": "#FCECA490",
+          "CenterGoalColor": "#5D974D90"
+        }
       }
     ],
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
@@ -74,6 +98,30 @@
                   "min": "1",
                   "max": "10",
                   "step": "1"
+                }
+              },
+              "colors": {
+                "name": "Colours of Goal Post",
+                "type": "object<GoalColor>",
+                "typeOptions": {
+                  "GoalColor": {
+                    "poleColor": {
+                      "name": "Pole Color",
+                      "type": "color"
+                    },
+                    "OutsiderGoalColor": {
+                      "name": "Outsider Goal Color",
+                      "type": "color"
+                    },
+                    "MiddleGoalColor": {
+                      "name": "Middle Goal Color",
+                      "type": "color"
+                    },
+                    "CenterGoalColor": {
+                      "name": "Center Goal Color",
+                      "type": "color"
+                    }
+                  }
                 }
               },
               "position": {

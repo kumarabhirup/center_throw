@@ -50,10 +50,10 @@ game.load = function() {
                 greenWidth,
                 greenHeight,
                 shift,
-                poleColor: color('#C2D72E'),
-                redColor: color('#C3796990'),
-                yellowColor: color('#FCECA490'),
-                greenColor: color('#5D974D90'),
+                poleColor: color(level.colors.poleColor),
+                redColor: color(level.colors.OutsiderGoalColor),
+                yellowColor: color(level.colors.MiddleGoalColor),
+                greenColor: color(level.colors.CenterGoalColor),
             };
         });
     }
