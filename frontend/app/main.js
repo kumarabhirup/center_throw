@@ -28,9 +28,6 @@ function preload() {
     gfx.powerLine = loadImage(Koji.config.images.powerline)
     gfx.speakerMuteWhite = loadImage(Koji.config.images.soundMute);
     gfx.speakerWhite = loadImage(Koji.config.images.sound);
-    gfx.stadium1 = loadImage(Koji.config.images.stadium1);
-    gfx.stadium2 = loadImage(Koji.config.images.stadium2);
-    gfx.stadium3 = loadImage(Koji.config.images.stadium3);
     gfx.logo1 = loadImage(Koji.config.images.sponsorship.left);
     gfx.logo2 = loadImage(Koji.config.images.sponsorship.right);
 

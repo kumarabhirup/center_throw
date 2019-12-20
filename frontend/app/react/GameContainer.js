@@ -50,7 +50,7 @@ class GameContainer extends Component {
     //   sndMusic.dispose()
     // }
 
-    this.p5Game.remove()
+    // this.p5Game.remove()
   }
 
   render() {
