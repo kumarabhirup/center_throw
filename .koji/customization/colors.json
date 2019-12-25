@@ -14,8 +14,8 @@
     "buttonHoverColor": "#23bcc5",
     "buttonClickColor": "#2CECF5",
     "gameOverRectangleColor": "#0a0a31",
-    "gameOverTextColor": "#ffffff",
-    "gameCountdownColor": "#000000",
+    "gameOverTextColor": "#ffff00",
+    "gameCountdownColor": "#ffffff",
     "losingColor": "#ff0000"
   },
   "@@editor": [

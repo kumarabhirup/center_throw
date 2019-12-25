@@ -1,6 +1,6 @@
-# `Kicker Mix`
+# `Center Throw`
 
-Start your day by kicking soccer balls!
+Start your day by defending the center!
 
 ## ⚒️ Customizations
 
@@ -16,7 +16,7 @@ Avoid resizing the game window while playing, weird stuff happens.
 
 ```js
 window.setScore(score)
-window.setAppView('setScore')
+window.setAppView("setScore")
 ```
 
 Similarly, the app view can be set to `game`, `mainMenu` and so on.
@@ -78,7 +78,7 @@ $ git push github master # <- only if you also maintain a GitHub Repository
 
 ## 🤙 Wanna contribute❓
 
-Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup)
+Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup/center_throw)
 
 Or follow me and DM on [Twitter @kumar_abhirup](https://twitter.com/kumar_abhirup) 🙌
 
@@ -88,7 +88,7 @@ Or hit me up on Koji's official Discord server, username: kumar_abhirup 🌱
 
 **GPL © [Kumar Abhirup](https://kumar.now.sh)**
 
-_Follow me 👋 **on Twitter**_ →   [![Twitter](https://img.shields.io/twitter/follow/kumar_abhirup.svg?style=social&label=@kumar_abhirup)](https://twitter.com/kumar_abhirup)
+_Follow me 👋 **on Twitter**_ → [![Twitter](https://img.shields.io/twitter/follow/kumar_abhirup.svg?style=social&label=@kumar_abhirup)](https://twitter.com/kumar_abhirup)
 
 ## Credits for assets
 

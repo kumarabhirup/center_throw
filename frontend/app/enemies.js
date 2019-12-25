@@ -5,7 +5,7 @@ enemies.load = function () {
     enemies.container = [];
     enemies.spawnTimer = 1;
     enemies.spawnSpeed = 1.25;
-    enemies.speed = 100;
+    enemies.speed = map(Koji.config.strings.enemies.speed, 1, 10, 20, 200) // 100;
 }
 
 enemies.spawn = function (x, y, xv, yv) {

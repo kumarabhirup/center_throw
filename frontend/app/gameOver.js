@@ -60,18 +60,21 @@ gameOver.draw = function () {
     }
 
     // red overlay
-    fill(240, 0, 0, min(gameOver.t / gameOver.enemyAnimationLength, 1) * 160);
+    // fill(240, 0, 0, min(gameOver.t / gameOver.enemyAnimationLength, 1) * 160);
+    const alphColor = color(Koji.config.colors.losingColor) 
+    alphColor.setAlpha(min(gameOver.t / gameOver.enemyAnimationLength, 1) * 160)
+    fill(alphColor);
     rect(0, 0, targetWidth, targetHeight);
 
     // background rect
-    fill(9, 10, 49);
+    fill(Koji.config.colors.gameOverRectangleColor);
     rect(targetWidth / 2 - gameOver.w / 2, gameOver.y, gameOver.w, gameOver.h);
 
     // game over text
-    fill(255, 217, 90);
+    fill(Koji.config.colors.gameOverTextColor);
     textSize(48);
     textAlign(CENTER, CENTER);
-    text('GAME OVER', targetWidth / 2, gameOver.y + gameOver.h / 2);
+    text(Koji.config.strings.gameOverText, targetWidth / 2, gameOver.y + gameOver.h / 2);
 
     pop();
 }

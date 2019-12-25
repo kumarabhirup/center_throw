@@ -43,10 +43,10 @@ class Game {
 
     drawUI() {
         // score
-        fill(0);
-        textSize(48);
+        fill(Koji.config.colors.scoreColor);
+        textSize(52);
         textAlign(CENTER, CENTER);
-        text('Score: ' + floor(gameTime * 2), targetWidth / 2, 80);
+        text(Koji.config.strings.scoreText + floor(gameTime * 2), targetWidth / 2, 80);
     }
 
     drawSides() {

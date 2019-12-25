@@ -7,12 +7,12 @@ class Player {
         this.w = this.img.width;
         this.h = this.img.height;
 
-        this.clickToShoot = true;
+        this.clickToShoot = Koji.config.strings.center.sling.clickToShoot;
         this.aimGrabRadius = 70;
         this.aimHeld = false;
         // joy will move distance pulled / second * multiplier
         // (travels to center in (1/multiplier) seconds)
-        this.shootSpeedMultiplier = 6;
+        this.shootSpeedMultiplier = Koji.config.strings.center.sling.speed // 6;
 
         this.body = world.createBody({
             position: Vec2(this.x / meterScale, this.y / meterScale),
@@ -46,7 +46,7 @@ class Player {
     draw() {
         push();
         if (this.aimHeld && gameState === 'playing') {
-            stroke('#CF4EAF');
+            stroke(Koji.config.strings.center.sling.slingRopeColor);
             strokeWeight(6);
             line(this.x, this.y, scaledMouseX, scaledMouseY);
         }

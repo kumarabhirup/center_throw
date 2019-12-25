@@ -23,7 +23,7 @@ var countdownTimer = 3;
 
 function preload() {
     gfx.speaker = loadImage(Koji.config.images.sound);
-    gfx.speakerMute = loadImage(Koji.config.images.mute);
+    gfx.speakerMute = loadImage(Koji.config.images.soundMute);
     gfx.backgroundTile = loadImage(Koji.config.images.backgroundInGame);
     gfx.backgroundTileBlur = loadImage(Koji.config.images.backgroundInGameBlur);
     gfx.duck = loadImage(Koji.config.strings.center.image);
@@ -193,7 +193,7 @@ function draw() {
             if (countdownTimer >= 0) {
                 fill(0, 64);
                 rect(0, 0, targetWidth, targetHeight);
-                fill(0);
+                fill(Koji.config.colors.gameCountdownColor);
                 textSize(lerp(64, 96, ease.outCubic(utils.pingPong(countdownTimer * 2))));
                 textAlign(CENTER, CENTER);
                 text(floor(countdownTimer) + 1, targetWidth / 2, targetHeight / 2);

@@ -3,9 +3,9 @@
     "center": {
       "image": "https://i.ibb.co/W5zcWWr/duck.png",
       "sling": {
-        "speed": 5,
+        "speed": 6,
         "image": "https://i.ibb.co/zRnbjLM/joy.png",
-        "slingRopeColor": "#000000",
+        "slingRopeColor": "#CF4EAF",
         "clickToShoot": false
       }
     },
@@ -24,7 +24,7 @@
     "defaultPlayerName": "Enter your name",
     "playButtonText": "PLAY NOW",
     "leaderboardButtonText": "LEADERBOARD",
-    "scoreText": "SCORE",
+    "scoreText": "",
     "gameOverText": "GAME OVER",
     "emailInputEnabled": false,
     "mainMenuBackgroundSize": ""
