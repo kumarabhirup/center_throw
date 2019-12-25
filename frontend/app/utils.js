@@ -6,8 +6,12 @@ var utils = {
     hash: function (x, y) {
         return abs(sin(x * 12.9898 + y * 4.1414) * 43758.5453) % 1;
     },
-    pingPong: function(t) {
+    pingPong: function (t) {
+        t = abs(t);
         return t % 2 < 1 ? t % 1 : 1 - t % 1;
+    },
+    mod: function(n, m) {
+        return ((n % m) + m) % m;
     }
 }
 

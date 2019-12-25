@@ -1,324 +1,90 @@
 
-var game = {}
-
-game.load = function() {
-    game.x = -1;
-    game.y = -1;
-    game.choosingX = false;
-    game.choosingY = false;
-    game.xTime = 0;
-    game.yTime = 0;
-    game.lastScore = 0;
-    game.score = 0;
-    game.stage = 0;
-    game.kickAnimationTimer = 0;
-    game.spawnedReactionText = false;
-    game.spawnedPointText = false;
-
-    if (!game.stages) {
-        game.stages = Koji.config.strings.levels.map((level, idx) => {
-            const background = gfx.backgroundImages[idx];
-            const numBalls = level.kicks;
-            const aimWidth = 500;
-            const aimHeight = 375;
-            const redWidth = aimWidth * 0.5;
-            const redHeight = aimHeight;
-            const yellowWidth = redWidth * 0.6;
-            const yellowHeight = redHeight * 0.6;
-            const greenWidth = yellowWidth * 0.3;
-            const greenHeight = yellowHeight * 0.3;
-
-            let shift = 0;
-            if (level.position === 'left') {
-                shift = 0.001;
-            }
-            if (level.position === 'right') {
-                shift = -0.001;
-            }
-
-            return {
-                background,
-                goalCenterX: targetWidth / 2,
-                goalCenterY: targetHeight / 2,
-                aimWidth,
-                aimHeight,
-                numBalls,
-                redWidth,
-                redHeight,
-                yellowHeight,
-                yellowWidth,
-                greenWidth,
-                greenHeight,
-                shift,
-                poleColor: color(level.colors.poleColor),
-                redColor: color(level.colors.OutsiderGoalColor),
-                yellowColor: color(level.colors.MiddleGoalColor),
-                greenColor: color(level.colors.CenterGoalColor),
-            };
-        });
+class Game {
+    constructor() {
+        this.bgX = -50;
+        this.bgSpeed = 140;
+        
+        physics.load();
+        player = new Player();
+        projectiles.load();
+        enemies.load();
     }
-}
 
-game.start = function() {
-    game.choosingX = true;
-    game.xTime = gameTime;
-}
+    update(dt) {
+        this.bgX -= this.bgSpeed * dt;
+        physics.update(dt);
+        enemies.update(dt);
+    }
 
-game.update = function(dt) {
-    if (game.choosingX) {
-        let xt = (gameTime - game.xTime) / 2;
-        game.x = ease.inOutCubic(utils.pingPong(xt)) * 2 - 1;
-    } else if (game.choosingY) {
-        let yt = (gameTime - game.yTime) / 2;
-        game.y = ease.inOutCubic(utils.pingPong(yt)) * 2 - 1;
-    } else {
-        let sv = game.stages[game.stage]; // stage values
-        game.kickAnimationTimer += dt;
+    mousePressed() {
+        player.mousePressed();
+    }
 
-        // animate camera
-        let t = utils.pingPong(min(game.kickAnimationTimer, 2));
-        let hitX = sv.goalCenterX + game.x * sv.aimWidth / 2;
-        let hitY = sv.goalCenterY + game.y * sv.aimHeight / 2 + game.x * sv.shift;
-        cam.x = lerp(targetWidth / 2, hitX, ease.outQuad(t));
-        cam.y = lerp(targetHeight / 2, hitY, ease.outQuad(t));
-        cam.scale = lerp(1, 1.2, ease.outQuad(t));
-
-        // spawn text / sound
-        if (game.kickAnimationTimer > 1 && !game.spawnedReactionText) {
-            let p = game.projectPoint(game.x * sv.aimWidth / 2, game.y * sv.aimHeight / 2);
-            p.x += sv.goalCenterX;
-            p.y += sv.goalCenterY;
-            popupText.spawn(p.x, p.y, game.getMessageFromPosition(), 24, 60);
-            game.spawnedReactionText = true;
-
-            if (game.isPoleHit()) {
-                sfx.impact.play();
-            }
-            if (game.getScoreFromPosition() === 0) {
-                sfx.boo.play();
-            } else {
-                sfx.clap.play();
-            }
-
-        }
-        if (game.kickAnimationTimer > 1.25 && !game.spawnedPointText) {
-            let p = game.projectPoint(game.x * sv.aimWidth / 2, game.y * sv.aimHeight / 2);
-            p.x += sv.goalCenterX;
-            p.y += sv.goalCenterY;
-            let score = game.getScoreFromPosition();
-            if (score !== 0) {
-                popupText.spawn(p.x, p.y, '+' + score, 24, 40);
-            }
-            game.spawnedPointText = true;
-        }
-
-        // load next stage or ball if animation finished
-        if (game.kickAnimationTimer > 2) {
-            if (game.stages[game.stage].numBalls <= 0) {
-                if (game.stage >= game.stages.length - 1) {
-                    gameState = 'gameOver';
-                } else {
-                    let score = game.score;
-                    let stage = game.stage + 1;
-                    game.load();
-                    game.lastScore = score;
-                    game.score = score;
-                    game.stage = stage;
-                    game.start();
-                }
-            } else {
-                let score = game.score;
-                let stage = game.stage;
-                game.load();
-                game.lastScore = score;
-                game.score = score;
-                game.stage = stage;
-                game.start();
+    mouseReleased() {
+        player.mouseReleased();
+    }
+    
+    draw() {
+        // background
+        let img = gfx.backgroundTile;
+        for (let i = 0; i < ceil(targetWidth / img.width) + 1; i++) {
+            for (let j = 0; j < ceil(targetHeight / img.height); j++) {
+                let m = ceil(targetWidth / img.width + 1) * img.width;
+                let x = -img.width + utils.mod(this.bgX + img.width * i, m);
+                let y = img.height * j;
+                image(img, x, y);
             }
         }
-    }
-}
 
-game.isPoleHit = function() {
-    let sv = game.stages[game.stage];
-    let x = game.x * sv.aimWidth / 2;
-    let y = game.y * sv.aimHeight / 2;
-    let ballRadius = 75 / 4 / 2;
-    // bottom pole
-    if (x + ballRadius > -sv.redWidth / 2 && x - ballRadius / 2 < sv.redWidth / 2 && y + ballRadius > sv.redHeight / 2) {
-        return true;
+        player.draw();
+        enemies.draw();
+        projectiles.draw();
     }
-    // sides
-    if (x + ballRadius > -sv.redWidth / 2 && x - ballRadius < -sv.redWidth / 2
-    || x + ballRadius > sv.redWidth / 2 && x - ballRadius < sv.redWidth / 2) {
-        return true;
-    }
-    return false;
-}
 
-game.getScoreFromPosition = function() {
-    let sv = game.stages[game.stage];
-    if (game.isPoleHit()) {
-        return 0;
+    drawUI() {
+        // score
+        fill(0);
+        textSize(48);
+        textAlign(CENTER, CENTER);
+        text('Score: ' + floor(gameTime * 2), targetWidth / 2, 80);
     }
-    if (game.x > -sv.greenWidth / sv.aimWidth && game.x < sv.greenWidth / sv.aimWidth
-    && game.y > -sv.greenHeight / sv.aimHeight && game.y < sv.greenHeight / sv.aimHeight) {
-        return 300;
-    } else if (game.x > -sv.yellowWidth / sv.aimWidth && game.x < sv.yellowWidth / sv.aimWidth
-    && game.y > -sv.yellowHeight / sv.aimHeight && game.y < sv.yellowHeight / sv.aimHeight) {
-        return 200;
-    } else if (game.x > -sv.redWidth / sv.aimWidth && game.x < sv.redWidth / sv.aimWidth) {
-        return 100;
-    } else {
-        return 0;
-    }
-}
 
-game.getMessageFromPosition = function() {
-    let sv = game.stages[game.stage];
-    if (game.isPoleHit()) {
-        return Koji.config.strings.poleHitText;
-    } else if (game.x < -sv.redWidth / sv.aimWidth) {
-        return Koji.config.strings.wideLeftText;
-    } else if (game.x > sv.redWidth / sv.aimWidth) {
-        return Koji.config.strings.wideRightText;
-    } else {
-        switch (game.getScoreFromPosition()) {
-            case 100:
-                return Koji.config.strings.score100Text;
-            case 200:
-                return Koji.config.strings.score200Text;
-            case 300:
-                return Koji.config.strings.score300Text;
-            default:
-                return '';
+    drawSides() {
+        let img = gfx.backgroundTileBlur;
+        // vertical and horizontal tiles don't have to line up (never showing at same time)
+        for (let i = 0; i < ceil(fullW / img.width); i++) {
+            let x = fullX + img.width * i;
+            // top
+            for (let j = -1; j >= floor(fullY / img.height); j--) {
+                let y = img.height * j;
+                image(img, x, y);
+            }
+            // bottom
+            for (let j = 0; j < ceil(-fullY / img.height); j++) {
+                let y = targetHeight + img.height * j;
+                image(img, x, y);
+            }
         }
-    }
-}
-
-game.projectPoint = function(x, y) {
-    let p = {};
-    p.x = x;
-    p.y = y + game.stages[game.stage].shift * x * y;
-    return p;
-}
-
-game.action = function() {
-    if (game.choosingX) {
-        game.choosingX = false;
-        game.choosingY = true;
-        game.yTime = gameTime;
-    } else if (game.choosingY) {
-        game.choosingY = false;
-        game.stages[game.stage].numBalls -= 1;
-        game.lastScore = game.score;
-        game.score += game.getScoreFromPosition();
-        sfx.whoosh.play();
-    }
-}
-
-game.mousePressed = function() {
-    game.action();
-}
-
-game.keyPressed = function() {
-    if (keyCode === 32) { // space
-        game.action();
-    }
-}
-
-game.draw = function() {
-    let sv = game.stages[game.stage];
-    push();
-    translate(sv.goalCenterX, sv.goalCenterY);
-
-    // goal regions
-    fill(sv.redColor);
-    let p1 = game.projectPoint(-sv.redWidth / 2, -sv.redHeight / 2);
-    let p2 = game.projectPoint(sv.redWidth / 2, -sv.redHeight / 2)
-    let p3 = game.projectPoint(sv.redWidth / 2, sv.redHeight / 2);
-    let p4 = game.projectPoint(-sv.redWidth / 2, sv.redHeight / 2);
-    quad(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
-    fill(sv.yellowColor);
-    p1 = game.projectPoint(-sv.yellowWidth / 2, -sv.yellowHeight / 2);
-    p2 = game.projectPoint(sv.yellowWidth / 2, -sv.yellowHeight / 2)
-    p3 = game.projectPoint(sv.yellowWidth / 2, sv.yellowHeight / 2);
-    p4 = game.projectPoint(-sv.yellowWidth / 2, sv.yellowHeight / 2);
-    quad(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
-    fill(sv.greenColor);
-    p1 = game.projectPoint(-sv.greenWidth / 2, -sv.greenHeight / 2);
-    p2 = game.projectPoint(sv.greenWidth / 2, -sv.greenHeight / 2)
-    p3 = game.projectPoint(sv.greenWidth / 2, sv.greenHeight / 2);
-    p4 = game.projectPoint(-sv.greenWidth / 2, sv.greenHeight / 2);
-    quad(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
-
-    // poles
-    stroke(sv.poleColor);
-    strokeWeight(4);
-    p1 = game.projectPoint(-sv.redWidth / 2, sv.redHeight / 2);
-    p2 = game.projectPoint(sv.redWidth / 2, sv.redHeight / 2);
-    line(p1.x, p1.y, p2.x, p2.y);
-    p1 = game.projectPoint(0, sv.redHeight / 2);
-    p2 = game.projectPoint(0, sv.redHeight / 2 + 40);
-    line(p1.x, p1.y, p2.x, p2.y);
-    p1 = game.projectPoint(-sv.redWidth / 2, -sv.redHeight / 2);
-    p2 = game.projectPoint(-sv.redWidth / 2, sv.redHeight / 2);
-    line(p1.x, p1.y, p2.x, p2.y);
-    p1 = game.projectPoint(sv.redWidth / 2, -sv.redHeight / 2);
-    p2 = game.projectPoint(sv.redWidth / 2, sv.redHeight / 2);
-    line(p1.x, p1.y, p2.x, p2.y);
-    noStroke();
-
-    // aim bars
-    push();
-    translate(0, -sv.redHeight / 2 - 50);
-    image(gfx.powerLine, -350 / 2, -28 / 2, 350, 28);
-    fill(sv.greenColor);
-    rect(-sv.greenWidth / sv.aimWidth / 2 * 350 - 2, -4, 4, 9);
-    rect(sv.greenWidth / sv.aimWidth / 2 * 350 - 2, -4, 4, 9);
-    translate(game.x * 350 / 2, 0);
-    rotate(game.x * 0.3);
-    image(gfx.arrow, -20, -50, 40, 50);
-    pop();
-
-    push();
-    translate(sv.redWidth / 2 + 50, 0);
-    rotate(PI / 2);
-    image(gfx.powerLine, -350 / 2, -28 / 2, 350, 28);
-    fill(sv.greenColor);
-    rect(-sv.greenHeight / sv.aimHeight / 2 * 350 - 2, -4, 4, 9);
-    rect(sv.greenHeight / sv.aimHeight / 2 * 350 - 2, -4, 4, 9);
-    translate(game.y * 350 / 2, 0);
-    rotate(game.y * 0.3);
-    image(gfx.arrow, -20, -50, 40, 50);
-    pop();
-
-    let t = game.kickAnimationTimer;
-    // ball / hit point
-    {
-        let p = game.projectPoint(game.x * sv.aimWidth / 2, game.y * sv.aimHeight / 2);
-        let x = lerp(0, p.x, t);
-        let y = lerp(350, p.y, ease.inOutQuad(utils.pingPong(t)));
-        let w = 75 / (t * 3 + 1);
-        //let h = lerp(0.1, w * 5 / 3, cos(t * PI * 4) * 0.5 + 0.5);
-        let h = w * 5 / 3;
-        // bounce back if pole hit
-        if (t > 1 && game.isPoleHit()) {
-            w = 75 / ((2 - t) * 3 + 1);
+        for (let j = 0; j < ceil(fullH / img.height); j++) {
+            let y = img.height * j;
+            // left
+            for (let i = -1; i >= floor(fullX / img.width); i--) {
+                let x = img.width * i;
+                image(img, x, y);
+            }
+            // right
+            for (let i = 0; i < ceil(-fullX / img.width); i++) {
+                let x = targetWidth + img.width * i;
+                image(img, x, y);
+            }
         }
-        let endAngle = lerp(0, PI / 8, game.x);
-        let angle = lerp(0, endAngle, min(t, 1));
-        angle += sin(t * 8) * PI / 8;
-        let alpha = lerp(255, 0, constrain((t - 1) * 1.5, 0, 1));
-        push();
-        translate(x, y);
-        rotate(angle);
-        if (t > 1) {
-            tint(255, alpha);
-        }
-        image(gfx.ball, -w / 2, -h / 2, w, h);
-        pop();
+        // dim sides
+        fill(0, 128);
+        // top/bottom
+        rect(fullX, fullY, fullW, 0 - fullY);
+        rect(fullX, targetHeight, fullW, fullY + fullH - targetHeight);
+        // left/right
+        rect(fullX, fullY, 0 - fullX, fullH);
+        rect(targetWidth, fullY, fullX + fullW - targetWidth, fullH);
     }
-
-    pop();
 }

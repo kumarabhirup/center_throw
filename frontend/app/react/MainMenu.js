@@ -109,7 +109,7 @@ class MainMenu extends Component {
         style={{
           background: this.background,
           color: Koji.config.colors.titleColor,
-          backgroundSize: '',
+          backgroundSize: Koji.config.strings.mainMenuBackgroundSize,
         }}
       >
         <div>

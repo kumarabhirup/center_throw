@@ -10,14 +10,19 @@ const { p5 } = window
 
 class GameContainer extends Component {
   componentDidMount() {
+    require('script-loader!app/react/planck.min.js')
+
     require('script-loader!app/utils.js')
     require('script-loader!app/main.js')
     require('script-loader!app/menu.js')
-    require('script-loader!app/game.js')
     require('script-loader!app/cam.js')
-    require('script-loader!app/popupText.js')
-    require('script-loader!app/gameOver.js')
     require('script-loader!app/volume.js')
+    require('script-loader!app/physics.js')
+    require('script-loader!app/game.js')
+    require('script-loader!app/player.js')
+    require('script-loader!app/projectiles.js')
+    require('script-loader!app/enemies.js')
+    require('script-loader!app/gameOver.js')
 
     let _playerName = Koji.config.strings.defaultPlayerName
     if (localStorage.getItem('playerName')) {
