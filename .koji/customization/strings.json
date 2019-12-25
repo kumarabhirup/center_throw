@@ -1,16 +1,16 @@
 {
   "strings": {
     "center": {
-      "image": "",
+      "image": "https://i.ibb.co/W5zcWWr/duck.png",
       "sling": {
         "speed": 5,
-        "image": "",
-        "slingRopeColor": "",
+        "image": "https://i.ibb.co/zRnbjLM/joy.png",
+        "slingRopeColor": "#000000",
         "clickToShoot": false
       }
     },
     "enemies": {
-      "image": "",
+      "image": "https://i.ibb.co/LhCjy0F/cheese.png",
       "speed": 5
     },
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",

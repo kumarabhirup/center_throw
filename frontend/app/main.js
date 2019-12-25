@@ -22,21 +22,21 @@ var player;
 var countdownTimer = 3;
 
 function preload() {
-    gfx.speaker = loadImage('https://i.ibb.co/9n4gL8p/speaker.png');
-    gfx.speakerMute = loadImage('https://i.ibb.co/2MnH005/speaker-Mute.png');
-    gfx.backgroundTile = loadImage('https://i.ibb.co/k0gkdT8/background-Tile.png');
-    gfx.backgroundTileBlur = loadImage('https://i.ibb.co/kHKzPWQ/background-Tile-Blur.png');
-    gfx.duck = loadImage('https://i.ibb.co/W5zcWWr/duck.png');
-    gfx.joy = loadImage('https://i.ibb.co/zRnbjLM/joy.png');
-    gfx.cheese = loadImage('https://i.ibb.co/LhCjy0F/cheese.png');
+    gfx.speaker = loadImage(Koji.config.images.sound);
+    gfx.speakerMute = loadImage(Koji.config.images.mute);
+    gfx.backgroundTile = loadImage(Koji.config.images.backgroundInGame);
+    gfx.backgroundTileBlur = loadImage(Koji.config.images.backgroundInGameBlur);
+    gfx.duck = loadImage(Koji.config.strings.center.image);
+    gfx.joy = loadImage(Koji.config.strings.center.sling.image);
+    gfx.cheese = loadImage(Koji.config.strings.enemies.image);
 
     sfx.music = loadSound(Koji.config.sounds.backgroundMusic);
     sfx.music.setLoop(true);
     sfx.music.setVolume(0.5);
-    sfx.gameOver = loadSound(Koji.config.sounds.clap);
-    sfx.shoot = loadSound(Koji.config.sounds.clap);
+    sfx.gameOver = loadSound(Koji.config.sounds.gameOver);
+    sfx.shoot = loadSound(Koji.config.sounds.shoot);
     sfx.shoot.setVolume(0.25);
-    sfx.hit = loadSound(Koji.config.sounds.clap);
+    sfx.hit = loadSound(Koji.config.sounds.hit);
     sfx.hit.setVolume(0.5);
 
     masterVolume(defaultVolume);

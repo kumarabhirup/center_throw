@@ -3,8 +3,7 @@
     "backgroundMusic": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/656ac-stadium.mp3",
     "gameOver": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
     "shoot": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
-    "hit": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
-    "clap": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/4doxo-clap.wav"
+    "hit": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav"
   },
   "@@editor": [
     {
