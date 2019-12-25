@@ -3,13 +3,8 @@
     "sound": "https://i.ibb.co/PDqs7HN/speaker.png",
     "soundMute": "https://i.ibb.co/hyJVkQj/speaker-Mute.png",
     "background": "",
-    "arrow": "https://i.ibb.co/q74MDnV/arrow.png",
-    "ball": "https://i.ibb.co/W5QJ2h1/ball.png",
-    "powerline": "https://i.ibb.co/dm6Bjqb/power-Line.png",
-    "sponsorship": {
-      "left": "https://i.ibb.co/st69w1Z/logo1.jpg",
-      "right": "https://i.ibb.co/st69w1Z/logo1.jpg"
-    }
+    "backgroundInGame": "",
+    "backgroundInGameBlur": ""
   },
   "@@editor": [
     {
@@ -37,36 +32,15 @@
           "type": "image"
         },
         {
-          "key": "arrow",
-          "name": "Arrow Image",
+          "key": "backgroundInGame",
+          "name": "Background in Game",
           "type": "image"
         },
         {
-          "key": "powerline",
-          "name": "Powerline Image",
+          "key": "backgroundInGameBlur",
+          "name": "Background behind Game",
+          "description": "Blur image recommended",
           "type": "image"
-        },
-        {
-          "key": "ball",
-          "name": "Ball Image",
-          "type": "image"
-        },
-        {
-          "key": "sponsorship",
-          "name": "Sponsor Images",
-          "type": "object<Sponsor>",
-          "typeOptions": {
-            "Sponsor": {
-              "left": {
-                "name": "Left Sponsor",
-                "type": "image"
-              },
-              "right": {
-                "name": "Rigth Sponsor",
-                "type": "image"
-              }
-            }
-          }
         }
       ]
     }

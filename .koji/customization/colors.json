@@ -13,13 +13,10 @@
     "playButtonClickColor": "#ffda5a",
     "buttonHoverColor": "#23bcc5",
     "buttonClickColor": "#2CECF5",
-    "scoreboardTextColor": "#E51C23",
-    "scoreboardBackgroundColor": "#000000",
     "gameOverRectangleColor": "#0a0a31",
     "gameOverTextColor": "#ffffff",
-    "shieldProgressBarColor": "#000000",
-    "speedProgressBarColor": "#ff0000",
-    "gameCountdownColor": "#000000"
+    "gameCountdownColor": "#000000",
+    "losingColor": "#ff0000"
   },
   "@@editor": [
     {
@@ -89,16 +86,6 @@
           "type": "color"
         },
         {
-          "key": "scoreboardTextColor",
-          "name": "Scoreboard Text Color",
-          "type": "color"
-        },
-        {
-          "key": "scoreboardBackgroundColor",
-          "name": "Scoreboard Background Color",
-          "type": "color"
-        },
-        {
           "key": "textColor",
           "name": "Text Color",
           "type": "color"
@@ -114,18 +101,13 @@
           "type": "color"
         },
         {
-          "key": "shieldProgressBarColor",
-          "name": "Shield Progress Bar Color",
-          "type": "color"
-        },
-        {
-          "key": "speedProgressBarColor",
-          "name": "Speed Progress Bar Color",
-          "type": "color"
-        },
-        {
           "key": "gameCountdownColor",
           "name": "Game Countdown Color",
+          "type": "color"
+        },
+        {
+          "key": "losingColor",
+          "name": "Losing Effect Color",
           "type": "color"
         }
       ]

@@ -2,14 +2,11 @@
   "quickstart": {
     "items": [
       "strings.title",
-      "images.ball",
-      "sounds.backgroundMusic",
-      "sounds.boo",
-      "sounds.clap",
-      "sounds.whoosh",
-      "sounds.impact",
-      "colors.scoreboardTextColor",
-      "colors.scoreboardBackgroundColor"
+      "strings.center",
+      "strings.enemies",
+      "images.backgroundInGame",
+      "images.backgroundInGameBlur",
+      "sounds.backgroundMusic"
     ]
   }
 }

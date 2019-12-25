@@ -1,10 +1,10 @@
 {
   "sounds": {
     "backgroundMusic": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/656ac-stadium.mp3",
-    "boo": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
-    "clap": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/4doxo-clap.wav",
-    "whoosh": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/zelxj-whoosh.wav",
-    "impact": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/y3f1k-impact.wav"
+    "gameOver": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
+    "shoot": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
+    "hit": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/frqss-boo.wav",
+    "clap": "https://objects.koji-cdn.com/c6b91ce4-fbd6-43e8-9609-1c3dc447485b/4doxo-clap.wav"
   },
   "@@editor": [
     {
@@ -20,27 +20,21 @@
           "type": "sound"
         },
         {
-          "key": "boo",
-          "name": "Losing/Booing Sound",
-          "description": "Sound when player misses the goal.",
+          "key": "gameOver",
+          "name": "Game Over Sound",
+          "description": "Sound when player loses.",
           "type": "sound"
         },
         {
-          "key": "clap",
-          "name": "Clapping Sound",
-          "description": "Sound when player kicks it right.",
+          "key": "shoot",
+          "name": "Shoot Sound",
+          "description": "Sound when player shoots the sling.",
           "type": "sound"
         },
         {
-          "key": "whoosh",
-          "name": "Whoosh Sound",
-          "description": "Sound when ball is kicked.",
-          "type": "sound"
-        },
-        {
-          "key": "impact",
-          "name": "Ball Impact Sound",
-          "description": "Sound when ball hits goal.",
+          "key": "hit",
+          "name": "Hit Sound",
+          "description": "Sound when bullet hits the enemy.",
           "type": "sound"
         }
       ]

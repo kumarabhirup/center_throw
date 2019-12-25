@@ -1,70 +1,30 @@
 {
   "strings": {
-    "levels": [
-      {
-        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/184p9-6003240fdffd413c99b89bd6834db57c.png",
-        "kicks": 3,
-        "position": "center",
-        "colors": {
-          "poleColor": "#C2D72E",
-          "OutsiderGoalColor": "#C3796990",
-          "MiddleGoalColor": "#FCECA490",
-          "CenterGoalColor": "#5D974D90"
-        }
-      },
-      {
-        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 6,
-        "position": "left",
-        "colors": {
-          "poleColor": "#C2D72E",
-          "OutsiderGoalColor": "#C3796990",
-          "MiddleGoalColor": "#FCECA490",
-          "CenterGoalColor": "#5D974D90"
-        }
-      },
-      {
-        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 8,
-        "position": "right",
-        "colors": {
-          "poleColor": "#C2D72E",
-          "OutsiderGoalColor": "#C3796990",
-          "MiddleGoalColor": "#FCECA490",
-          "CenterGoalColor": "#5D974D90"
-        }
-      },
-      {
-        "background": "https://images.koji-cdn.com/2d9fb96c-9ee5-458c-93e9-022c355d3ca5/ive2r-8aa69bcf6a91478ba18e607a291cd2b2.png",
-        "kicks": 10,
-        "position": "center",
-        "colors": {
-          "poleColor": "#C2D72E",
-          "OutsiderGoalColor": "#C3796990",
-          "MiddleGoalColor": "#FCECA490",
-          "CenterGoalColor": "#5D974D90"
-        }
+    "center": {
+      "image": "",
+      "sling": {
+        "speed": 5,
+        "image": "",
+        "slingRopeColor": "",
+        "clickToShoot": false
       }
-    ],
+    },
+    "enemies": {
+      "image": "",
+      "speed": 5
+    },
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
-    "title": "Kicker Mix",
-    "desktop_instructions1": "Kick the ball and score the maximum!",
-    "desktop_instructions2": "Press spacebar on the right time...",
-    "desktop_instructions3": "The more centered you aim, the more you score!",
-    "mobile_instructions1": "Kick the ball and score the maximum!",
-    "mobile_instructions2": "Tap on the right time...",
-    "mobile_instructions3": "The more centered you aim, the more you score!",
+    "title": "Center Throw",
+    "desktop_instructions1": "Defend your center!",
+    "desktop_instructions2": "Pull from the center to repel the cheeses!",
+    "desktop_instructions3": "Drag with mouse and release to shoot!",
+    "mobile_instructions1": "Defend your center!",
+    "mobile_instructions2": "Pull from the center to repel the cheeses!",
+    "mobile_instructions3": "Drag touch and release to shoot!",
     "defaultPlayerName": "Enter your name",
     "playButtonText": "PLAY NOW",
     "leaderboardButtonText": "LEADERBOARD",
-    "stageText": "STAGE",
     "scoreText": "SCORE",
-    "poleHitText": "POLE HIT!",
-    "wideLeftText": "WIDE LEFT!",
-    "wideRightText": "WIDE RIGHT!",
-    "score100Text": "NOT BAD!",
-    "score200Text": "GOOD!",
-    "score300Text": "SUPERB!",
     "gameOverText": "GAME OVER",
     "emailInputEnabled": false,
     "mainMenuBackgroundSize": ""
@@ -77,72 +37,67 @@
       "source": "strings.json",
       "fields": [
         {
-          "key": "levels",
-          "type": "object<Level>[]",
-          "arrayOptions": {
-            "min": "1",
-            "addItemLabel": "Add Level"
-          },
+          "key": "center",
+          "name": "Center",
+          "type": "object<Center>",
           "typeOptions": {
-            "Level": {
-              "background": {
-                "name": "Background Image",
-                "description": "The image for this level",
+            "Center": {
+              "image": {
+                "name": "Center Image",
+                "description": "Square image 250x250 preferred.",
                 "type": "image"
               },
-              "kicks": {
-                "name": "Kicks",
-                "description": "How many kicks for this level",
+              "sling": {
+                "name": "Sling Settings",
+                "type": "object<Sling>",
+                "typeOptions": {
+                  "Sling": {
+                    "speed": {
+                      "name": "Speed of the Sling",
+                      "type": "range",
+                      "typeOptions": {
+                        "min": "1",
+                        "max": "10",
+                        "step": "1"
+                      }
+                    },
+                    "image": {
+                      "name": "Sling Image",
+                      "description": "Rect image 67x39 preferred.",
+                      "type": "image"
+                    },
+                    "slingRopeColor": {
+                      "name": "Sling Rope Color",
+                      "type": "color"
+                    },
+                    "clickToShoot": {
+                      "name": "Enable Click to Shoot",
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "enemies",
+          "name": "Enemies",
+          "type": "object<Enemy>",
+          "typeOptions": {
+            "Enemy": {
+              "image": {
+                "name": "Enemy Image",
+                "description": "Square image 250x250 preferred.",
+                "type": "image"
+              },
+              "speed": {
+                "name": "Speed of the Enemy",
                 "type": "range",
                 "typeOptions": {
                   "min": "1",
                   "max": "10",
                   "step": "1"
-                }
-              },
-              "colors": {
-                "name": "Colours of Goal Post",
-                "type": "object<GoalColor>",
-                "typeOptions": {
-                  "GoalColor": {
-                    "poleColor": {
-                      "name": "Pole Color",
-                      "type": "color"
-                    },
-                    "OutsiderGoalColor": {
-                      "name": "Outsider Goal Color",
-                      "type": "color"
-                    },
-                    "MiddleGoalColor": {
-                      "name": "Middle Goal Color",
-                      "type": "color"
-                    },
-                    "CenterGoalColor": {
-                      "name": "Center Goal Color",
-                      "type": "color"
-                    }
-                  }
-                }
-              },
-              "position": {
-                "name": "Goalpost Position",
-                "type": "select",
-                "typeOptions": {
-                  "placeholder": "Choose a position...",
-                  "options": [
-                    {
-                      "value": "left",
-                      "label": "Left"
-                    },
-                    {
-                      "value": "center",
-                      "label": "Center"
-                    },
-                    {
-                      "value": "right",
-                      "label": "Right"
-                    }
-                  ]
                 }
               }
             }
@@ -211,56 +166,6 @@
         {
           "key": "gameOverText",
           "name": "Game Over Text",
-          "type": "text"
-        },
-        {
-          "key": "shieldText",
-          "name": "Shield Text",
-          "type": "text"
-        },
-        {
-          "key": "speedText",
-          "name": "Speed Text",
-          "type": "text"
-        },
-        {
-          "key": "stageText",
-          "name": "Stage Text",
-          "type": "text"
-        },
-        {
-          "key": "scoreText",
-          "name": "Stage Text",
-          "type": "text"
-        },
-        {
-          "key": "poleHitText",
-          "name": "Pole Hit Text",
-          "type": "text"
-        },
-        {
-          "key": "wideLeftText",
-          "name": "Wide Left Text",
-          "type": "text"
-        },
-        {
-          "key": "wideRightText",
-          "name": "Wide Right Text",
-          "type": "text"
-        },
-        {
-          "key": "score100Text",
-          "name": "Score 100 Text",
-          "type": "text"
-        },
-        {
-          "key": "score200Text",
-          "name": "Score 200 Text",
-          "type": "text"
-        },
-        {
-          "key": "score300Text",
-          "name": "Score 300 Text",
           "type": "text"
         },
         {
