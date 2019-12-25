@@ -1,14 +1,14 @@
 {
   "colors": {
-    "backgroundColor": "#0a0a31",
+    "backgroundColor": "#ffffff",
     "textColor": "#ffffff",
     "playButtonTextColor": "#0a0a31",
     "playButtonColor": "#ffda5a",
     "buttonTextColor": "#222222",
-    "buttonColor": "#2CECF5",
+    "buttonColor": "#ffffff",
     "scoreColor": "#000000",
-    "titleColor": "#ffda5a",
-    "instructionsColor": "#dfdcea",
+    "titleColor": "#000000",
+    "instructionsColor": "#000000",
     "playButtonHoverColor": "#E8C034",
     "playButtonClickColor": "#ffda5a",
     "buttonHoverColor": "#23bcc5",

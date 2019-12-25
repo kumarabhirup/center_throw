@@ -174,6 +174,7 @@ class MainMenu extends Component {
                   color: Koji.config.colors.buttonTextColor,
                   borderColor: Koji.config.colors.titleColor,
                   fontFamily: `${this.state.font}`,
+                  boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.4)`
                 }}
                 className="main-menu-input"
                 required
@@ -189,6 +190,7 @@ class MainMenu extends Component {
               backgroundColor: Koji.config.colors.buttonColor,
               color: Koji.config.colors.buttonTextColor,
               fontFamily: `${this.state.font}`,
+              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.4)`
             }}
           >
             {Koji.config.strings.playButtonText}
@@ -203,6 +205,7 @@ class MainMenu extends Component {
             backgroundColor: Koji.config.colors.buttonColor,
             color: Koji.config.colors.buttonTextColor,
             fontFamily: `${this.state.font}`,
+            boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.4)`
           }}
         >
           {Koji.config.strings.leaderboardButtonText}

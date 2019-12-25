@@ -2,7 +2,7 @@
   "images": {
     "sound": "https://i.ibb.co/9n4gL8p/speaker.png",
     "soundMute": "https://i.ibb.co/2MnH005/speaker-Mute.png",
-    "background": "",
+    "background": "https://i.ibb.co/kHKzPWQ/background-Tile-Blur.png",
     "backgroundInGame": "https://i.ibb.co/k0gkdT8/background-Tile.png",
     "backgroundInGameBlur": "https://i.ibb.co/kHKzPWQ/background-Tile-Blur.png"
   },
