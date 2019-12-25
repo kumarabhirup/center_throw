@@ -60,6 +60,8 @@ function setup() {
 
     cam.x = targetWidth / 2;
     cam.y = targetHeight / 2;
+
+    sfx.music.play();
 }
 
 function update() {

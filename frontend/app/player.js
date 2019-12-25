@@ -7,7 +7,7 @@ class Player {
         this.w = this.img.width;
         this.h = this.img.height;
 
-        this.clickToShoot = false;
+        this.clickToShoot = true;
         this.aimGrabRadius = 70;
         this.aimHeld = false;
         // joy will move distance pulled / second * multiplier
